@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+h2 {
+    @apply text-2xl font-bold mb-4;
+}
+
+h3 {
+    @apply text-xl font-bold mb-4;
+}
+
+h4 {
+    @apply text-lg font-bold mb-4;
+}
+
+p {
+    @apply mb-4;
+}
+
+li {
+    @apply mb-2;
+}
+
+.internal-link {
+    @apply text-blue-600 hover:underline;
+}
