@@ -7,6 +7,8 @@ import Image from "next/image";
 import LatestBlogCard from "@/components/LatestBlogCard";
 import FeaturedBlogCard from "@/components/FeaturedBlogCard";
 import Navbar from "@/components/Navbar";
+import NewsLetter from "@/components/NewsLetter";
+import NotFound from "@/app/not-found";
 
 export default function SingleBlogPage() {
   const { category, slug } = useParams();
@@ -30,17 +32,7 @@ export default function SingleBlogPage() {
   const featuredBlogs = blogsData.filter((b) => b.isFeatured).slice(0, 3);
 
   if (!blog) {
-    return (
-      <main className="max-w-4xl mx-auto h-screen flex flex-col items-center justify-center px-4 py-12 text-center">
-        <h1 className="text-2xl font-bold">Blog Not Found</h1>
-        <p className="text-gray-600 mt-2">
-          Sorry, the blog you’re looking for doesn’t exist.
-        </p>
-        <Link href="/blog" className="text-blue-600 mt-4 inline-block">
-          ← Back to Blogs
-        </Link>
-      </main>
-    );
+    return <NotFound />;
   }
 
   // JSON-LD for Article & FAQ
@@ -172,7 +164,7 @@ export default function SingleBlogPage() {
             href="/blog"
             className="inline-block px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
           >
-            ← Back to Blog
+            ← Return to Blogs
           </Link>
         </div>
 
@@ -204,6 +196,8 @@ export default function SingleBlogPage() {
           </section>
         )}
       </main>
+
+      <NewsLetter />
 
       <Footer />
     </>

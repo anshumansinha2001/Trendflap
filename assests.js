@@ -63,10 +63,11 @@ export const blogsData = [
 
   {
     id: 2,
+    title: "Top 5 Strategies for Web Performance Optimization",
+    slug: "web-performance-optimization-strategies",
     metaTitle: "Top 5 Strategies for Web Performance Optimization",
     metaDescription:
       "Boosting your website’s speed improves UX and SEO. Discover top web performance strategies including lazy loading, CDN usage, and code minification.",
-    title: "Top 5 Strategies for Web Performance Optimization",
     category: "AI",
     read: "3 min read",
     date: "April 10, 2025",
@@ -111,7 +112,6 @@ export const blogsData = [
           "Yes, Google uses page speed as a ranking factor, especially for mobile-first indexing.",
       },
     ],
-    slug: "web-performance-optimization-strategies",
   },
 
   {

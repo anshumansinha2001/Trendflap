@@ -4,11 +4,11 @@ const NewsLetter = () => {
   return (
     <section className="bg-blue-600 py-16 text-center text-white">
       <h2 className="text-3xl font-bold mb-4">Stay Ahead of the Curve</h2>
-      <p className="max-w-xs lg:max-w-xl mx-auto mb-6">
+      <p className="max-w-xs md:max-w-xl mx-auto mb-6">
         Join our newsletter to get the latest AI, tech, and marketing updates
         delivered straight to your inbox every week.
       </p>
-      <form className="flex flex-col md:flex-row justify-center gap-4 max-w-xs lg:max-w-lg mx-auto">
+      <form className="flex flex-col md:flex-row justify-center gap-4 max-w-xs md:max-w-lg mx-auto">
         <input
           type="email"
           placeholder="Enter your email"

@@ -1,6 +1,7 @@
 // pages/about.jsx
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import NewsLetter from "@/components/NewsLetter";
 
 export default function About() {
   return (
@@ -8,18 +9,18 @@ export default function About() {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="bg-gray-50 py-16 text-center">
-        <h1 className="text-4xl font-bold text-gray-900 mb-4">
+      <section className="bg-blue-50 py-6 md:py-12 text-center">
+        <h1 className="text-2xl md:text-4xl font-bold text-gray-900 mb-4">
           About Trendflap
         </h1>
-        <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+        <p className="text-sm md:text-lg text-gray-600 max-w-3xl mx-auto">
           Learn more about me, my journey, and why I started Trendflap – your
           go-to hub for AI, Technology, and Digital Marketing insights.
         </p>
       </section>
 
       {/* About Me Section */}
-      <section className="py-12 bg-white">
+      <section className="py-6 md:py-12 bg-white">
         <div className="max-w-5xl mx-auto px-4 grid md:grid-cols-2 gap-8 items-center">
           {/* Image (Optional - Can be replaced with your photo) */}
           <div className="bg-gray-200 h-64 rounded-lg flex items-center justify-center">
@@ -64,7 +65,7 @@ export default function About() {
       </section>
 
       {/* Mission Statement */}
-      <section className="bg-blue-600 py-16 text-center text-white">
+      <section className="bg-blue-50 py-16 text-center">
         <h2 className="text-3xl font-bold mb-4">Our Mission at Trendflap</h2>
         <p className="max-w-3xl mx-auto">
           To simplify AI, technology, and digital marketing concepts, making
@@ -74,28 +75,7 @@ export default function About() {
       </section>
 
       {/* Call to Action */}
-      <section className="py-16 text-center bg-gray-50">
-        <h2 className="text-2xl font-bold text-gray-900 mb-4">
-          Let’s Grow Together 🚀
-        </h2>
-        <p className="text-gray-700 mb-6">
-          Subscribe to Trendflap and get exclusive AI, tech, and digital
-          marketing tips straight to your inbox.
-        </p>
-        <form className="flex flex-col md:flex-row justify-center gap-4 max-w-md mx-auto">
-          <input
-            type="email"
-            placeholder="Enter your email"
-            className="px-4 py-2 rounded-md border border-gray-300 text-gray-900 w-full"
-          />
-          <button
-            type="submit"
-            className="px-6 py-2 bg-blue-600 text-white rounded-md font-semibold hover:bg-blue-700 transition"
-          >
-            Subscribe
-          </button>
-        </form>
-      </section>
+      <NewsLetter />
 
       <Footer />
     </>
