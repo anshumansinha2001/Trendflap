@@ -1,7 +1,6 @@
 "use client";
 import { useParams } from "next/navigation";
 import Link from "next/link";
-import { blogsData } from "@/assests";
 import Footer from "@/components/Footer";
 import Image from "next/image";
 import LatestBlogCard from "@/components/LatestBlogCard";
@@ -9,27 +8,63 @@ import FeaturedBlogCard from "@/components/FeaturedBlogCard";
 import Navbar from "@/components/Navbar";
 import NewsLetter from "@/components/NewsLetter";
 import NotFound from "@/app/not-found";
+import { fetchBlogBySlug, fetchBlogsByCategory, fetchBlogs } from "@/utils/api";
+import { useEffect, useState } from "react";
+import LoadingScreen from "@/components/LoadingScreen";
 
 export default function SingleBlogPage() {
   const { category, slug } = useParams();
 
-  // Find the exact current blog by category + slug
-  const blog = blogsData.find(
-    (b) =>
-      b.category.toLowerCase().replace(" ", "-") ===
-        category.toLowerCase().replace(" ", "-") && b.slug === slug
-  );
+  const [blog, setBlog] = useState(null);
+  const [latestBlogs, setLatestBlogs] = useState([]);
+  const [featuredBlogs, setFeaturedBlogs] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  // Fetch latest blogs from the same category (excluding current blog)
-  const latestBlogs = blogsData
-    .filter(
-      (b) =>
-        b.category.toLowerCase() === category.toLowerCase() && b.slug !== slug
-    )
-    .slice(0, 3);
+  useEffect(() => {
+    const loadBlog = async () => {
+      try {
+        // ✅ Fetch current blog
+        const currentBlog = await fetchBlogBySlug(slug);
+        setBlog(currentBlog);
 
-  // Fetch featured blogs
-  const featuredBlogs = blogsData.filter((b) => b.isFeatured).slice(0, 3);
+        // ✅ Fetch latest blogs of same category (excluding current)
+        const sameCategoryBlogs = await fetchBlogsByCategory(category);
+        setLatestBlogs(
+          sameCategoryBlogs.filter((b) => b.slug !== slug).slice(0, 3)
+        );
+
+        // ✅ Fetch featured blogs
+        const allBlogs = await fetchBlogs();
+        setFeaturedBlogs(allBlogs.filter((b) => b.isFeatured).slice(0, 3));
+      } catch (err) {
+        console.error("Failed to load blog:", err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadBlog();
+  }, [category, slug]);
+
+  if (loading) {
+    return <LoadingScreen />;
+  }
+
+  const date = new Date(blog.updatedAt);
+
+  const formatted = date.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+
+  const tldrList =
+    Array.isArray(blog.tldr) &&
+    blog.tldr.length === 1 &&
+    typeof blog.tldr[0] === "string" &&
+    blog.tldr[0].trim().startsWith("[")
+      ? JSON.parse(blog.tldr[0])
+      : blog.tldr || [];
 
   if (!blog) {
     return <NotFound />;
@@ -43,7 +78,7 @@ export default function SingleBlogPage() {
     author: { "@type": "Person", name: blog.author },
     datePublished: blog.date,
     image: blog.image,
-    articleBody: blog.content.replace(/<[^>]+>/g, ""),
+    articleBody: blog.content?.replace(/<[^>]+>/g, ""),
     mainEntityOfPage: {
       "@type": "WebPage",
       "@id": `https://yourdomain.com/${blog.category.toLowerCase()}/${
@@ -95,7 +130,7 @@ export default function SingleBlogPage() {
                 {blog.category}
               </Link>
               <span>
-                {blog.date} • {blog.read}
+                {formatted} • {blog.read}
               </span>
             </div>
             <div className="mb-8">
@@ -114,7 +149,7 @@ export default function SingleBlogPage() {
             <div>
               <h2 className="text-xl font-semibold mb-2">Table of Contents</h2>
               <ul className="list-decimal text-blue-600 pl-5 space-y-1">
-                {blog.toc.map((item, idx) => (
+                {blog.toc?.map((item, idx) => (
                   <li key={idx}>
                     <Link href={`#${item.id}`} className="hover:underline">
                       {item.text}
@@ -126,7 +161,7 @@ export default function SingleBlogPage() {
             <div className="bg-gray-50 p-4 rounded-lg shadow">
               <h2 className="font-bold text-lg mb-2">TL;DR</h2>
               <ul className="list-disc list-inside text-sm text-gray-700 space-y-1">
-                {blog.tldr.map((point, idx) => (
+                {tldrList.map((point, idx) => (
                   <li key={idx}>{point}</li>
                 ))}
               </ul>

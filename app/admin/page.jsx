@@ -8,7 +8,6 @@ import {
   FiUsers,
   FiSettings,
   FiBarChart2,
-  FiBell,
   FiMenu,
   FiPlus,
   FiTrash2,
@@ -16,6 +15,8 @@ import {
   FiMail,
 } from "react-icons/fi";
 import Link from "next/link";
+import Image from "next/image";
+import { adminPic } from "@/assests";
 
 export default function BlogAdminDashboard() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -26,7 +27,7 @@ export default function BlogAdminDashboard() {
     router.push("/admin/auth");
   };
 
-  // Fake blog data
+  // Fake data
   const blogs = [
     {
       id: 1,
@@ -47,15 +48,11 @@ export default function BlogAdminDashboard() {
       date: "2025-08-10",
     },
   ];
-
-  // Fake subscribers
   const subscribers = [
     { id: 1, email: "john@example.com", date: "2025-08-01" },
     { id: 2, email: "jane@example.com", date: "2025-08-05" },
     { id: 3, email: "alex@example.com", date: "2025-08-09" },
   ];
-
-  // Fake contact messages
   const messages = [
     {
       id: 1,
@@ -81,23 +78,23 @@ export default function BlogAdminDashboard() {
   ];
 
   return (
-    <div className="flex h-screen bg-gray-100">
+    <div className="flex h-screen bg-gray-50 overflow-hidden">
       {/* Sidebar */}
       <div
-        className={`fixed inset-y-0 left-0 transform bg-white shadow-md w-64 transition-transform duration-300 z-50 
+        className={`fixed inset-y-0 left-0 transform bg-white shadow-lg w-64 transition-transform duration-300 z-50 
         ${sidebarOpen ? "translate-x-0" : "-translate-x-64"} md:translate-x-0`}
       >
-        <div className="flex items-center justify-between px-4 py-3 border-b">
-          <h1 className="text-xl font-bold">Admin pannel</h1>
+        <div className="flex items-center justify-between px-4 py-4 border-b border-gray-200 bg-gray-50">
+          <h1 className="text-xl font-bold text-gray-800">Admin Panel</h1>
           <button
-            className="md:hidden text-gray-600"
+            className="md:hidden text-gray-600 hover:text-gray-800"
             onClick={() => setSidebarOpen(false)}
           >
             ✕
           </button>
         </div>
 
-        <nav className="mt-5 space-y-2">
+        <nav className="mt-6 space-y-1">
           <SidebarLink icon={<FiHome />} label="Home" href="/" />
           <SidebarLink
             icon={<FiFileText />}
@@ -126,7 +123,7 @@ export default function BlogAdminDashboard() {
           />
           <button
             onClick={handleLogout}
-            className="flex items-center gap-3 w-full text-left px-4 py-2 text-red-600 hover:bg-red-100"
+            className="flex items-center gap-3 w-full text-left px-4 py-2 text-red-600 hover:bg-red-100 font-medium"
           >
             🚪 Logout
           </button>
@@ -134,43 +131,36 @@ export default function BlogAdminDashboard() {
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 flex flex-col md:ml-64">
+      <div className="flex-1 flex flex-col md:ml-64 min-h-screen overflow-y-auto scrollbar-hidden">
         {/* Navbar */}
-        <header className="flex items-center justify-between bg-white shadow px-6 py-4 sticky top-0 z-40">
+        <header className="flex items-center justify-between bg-white shadow-sm px-4 sm:px-6 py-2.5 sticky top-0 z-40">
           <button
-            className="md:hidden text-gray-600"
+            className="md:hidden text-gray-600 hover:text-gray-900"
             onClick={() => setSidebarOpen(true)}
           >
             <FiMenu size={24} />
           </button>
 
           <div className="flex items-center gap-4">
-            <input
-              type="text"
-              placeholder="Search..."
-              className="border rounded px-3 py-1 hidden sm:block"
-            />
-            <button className="relative">
-              <FiBell size={20} />
-              <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full px-1">
-                2
-              </span>
-            </button>
             <div className="flex items-center gap-2">
-              <img
-                src="https://via.placeholder.com/30"
-                alt="Profile"
-                className="rounded-full"
+              <Image
+                width={40}
+                height={40}
+                src={adminPic}
+                alt="Admin"
+                className="rounded-full border"
               />
-              <span className="font-medium">Admin</span>
+              <span className="font-medium text-gray-700 text-sm sm:text-base">
+                Anshuman Sinha
+              </span>
             </div>
           </div>
         </header>
 
         {/* Dashboard Content */}
-        <main className="p-6 space-y-6">
+        <main className="p-4 sm:p-6 space-y-6">
           {/* Widgets */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <Widget title="Total Blogs" value={blogs.length.toString()} />
             <Widget title="Subscribers" value={subscribers.length.toString()} />
             <Widget
@@ -183,93 +173,60 @@ export default function BlogAdminDashboard() {
           </div>
 
           {/* Blog Management */}
-          <div className="bg-white p-4 shadow rounded">
-            <div className="flex justify-between items-center mb-4">
-              <h2 className="font-semibold text-lg">Manage Blogs</h2>
-              <button className="flex items-center gap-2 bg-blue-600 text-white px-3 py-2 rounded hover:bg-blue-700">
+          <Card
+            title="Manage Blogs"
+            action={
+              <Link
+                href="/admin/blogs/new"
+                className="flex items-center gap-2 bg-blue-600 text-white px-3 py-2 rounded-md text-sm hover:bg-blue-700"
+              >
                 <FiPlus /> New Blog
-              </button>
-            </div>
-            <table className="w-full text-left">
-              <thead>
-                <tr className="border-b">
-                  <th className="p-2">Title</th>
-                  <th className="p-2">Status</th>
-                  <th className="p-2">Date</th>
-                  <th className="p-2">Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {blogs.map((blog) => (
-                  <tr key={blog.id} className="border-b hover:bg-gray-50">
-                    <td className="p-2">{blog.title}</td>
-                    <td className="p-2">{blog.status}</td>
-                    <td className="p-2">{blog.date}</td>
-                    <td className="p-2 flex gap-2">
-                      <button className="text-blue-600 hover:text-blue-800">
-                        <FiEdit />
-                      </button>
-                      <button className="text-red-600 hover:text-red-800">
-                        <FiTrash2 />
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+              </Link>
+            }
+          >
+            <ResponsiveTable
+              headers={["Title", "Status", "Date", "Actions"]}
+              rows={blogs.map((blog) => [
+                blog.title,
+                blog.status,
+                blog.date,
+                <div key={blog.id} className="flex gap-2">
+                  <button className="text-blue-600 hover:text-blue-800">
+                    <FiEdit />
+                  </button>
+                  <button className="text-red-600 hover:text-red-800">
+                    <FiTrash2 />
+                  </button>
+                </div>,
+              ])}
+            />
+          </Card>
 
           {/* Subscribers */}
-          <div className="bg-white p-4 shadow rounded">
-            <h2 className="font-semibold text-lg mb-3">Email Subscribers</h2>
-            <table className="w-full text-left">
-              <thead>
-                <tr className="border-b">
-                  <th className="p-2">Email</th>
-                  <th className="p-2">Date Subscribed</th>
-                </tr>
-              </thead>
-              <tbody>
-                {subscribers.map((sub) => (
-                  <tr key={sub.id} className="border-b hover:bg-gray-50">
-                    <td className="p-2">{sub.email}</td>
-                    <td className="p-2">{sub.date}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+          <Card title="Email Subscribers">
+            <ResponsiveTable
+              headers={["Email", "Date Subscribed"]}
+              rows={subscribers.map((s) => [s.email, s.date])}
+            />
+          </Card>
 
-          {/* Contact Messages */}
-          <div className="bg-white p-4 shadow rounded">
-            <h2 className="font-semibold text-lg mb-3">Contact Messages</h2>
-            <table className="w-full text-left">
-              <thead>
-                <tr className="border-b">
-                  <th className="p-2">Name</th>
-                  <th className="p-2">Email</th>
-                  <th className="p-2">Message</th>
-                  <th className="p-2">Date</th>
-                  <th className="p-2">Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {messages.map((msg) => (
-                  <tr key={msg.id} className="border-b hover:bg-gray-50">
-                    <td className="p-2">{msg.name}</td>
-                    <td className="p-2">{msg.email}</td>
-                    <td className="p-2 truncate max-w-xs">{msg.message}</td>
-                    <td className="p-2">{msg.date}</td>
-                    <td className="p-2">
-                      <button className="text-red-600 hover:text-red-800">
-                        <FiTrash2 />
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+          {/* Messages */}
+          <Card title="Contact Messages">
+            <ResponsiveTable
+              headers={["Name", "Email", "Message", "Date", "Actions"]}
+              rows={messages.map((m) => [
+                m.name,
+                m.email,
+                <span className="truncate block max-w-[150px]">
+                  {m.message}
+                </span>,
+                m.date,
+                <button className="text-red-600 hover:text-red-800">
+                  <FiTrash2 />
+                </button>,
+              ])}
+            />
+          </Card>
         </main>
       </div>
     </div>
@@ -281,7 +238,7 @@ function SidebarLink({ icon, label, href }) {
   return (
     <Link
       href={href}
-      className="flex items-center gap-3 px-4 py-2 text-gray-700 hover:bg-gray-100"
+      className="flex items-center gap-3 px-4 py-2 text-gray-700 font-medium hover:bg-gray-100 transition rounded-md"
     >
       {icon}
       {label}
@@ -292,9 +249,57 @@ function SidebarLink({ icon, label, href }) {
 // Widget component
 function Widget({ title, value }) {
   return (
-    <div className="bg-white p-4 shadow rounded">
-      <h3 className="text-gray-500">{title}</h3>
-      <p className="text-2xl font-bold">{value}</p>
+    <div className="bg-white p-4 shadow-sm rounded-lg flex flex-col justify-center items-start">
+      <h3 className="text-gray-500 text-sm">{title}</h3>
+      <p className="text-2xl font-bold text-gray-800">{value}</p>
+    </div>
+  );
+}
+
+// Card Wrapper
+function Card({ title, action, children }) {
+  return (
+    <div className="bg-white p-4 shadow-sm rounded-lg overflow-hidden">
+      <div className="flex justify-between items-center mb-4">
+        <h2 className="font-semibold text-lg text-gray-800">{title}</h2>
+        {action}
+      </div>
+      {children}
+    </div>
+  );
+}
+
+// Responsive Table
+function ResponsiveTable({ headers, rows }) {
+  return (
+    <div className="overflow-x-auto scrollbar-hidden">
+      <table className="w-full text-left border-collapse">
+        <thead>
+          <tr className="bg-gray-100 text-gray-700 text-sm">
+            {headers.map((h, i) => (
+              <th key={i} className="p-2 border-b">
+                {h}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((row, i) => (
+            <tr
+              key={i}
+              className={`hover:bg-gray-50 text-sm ${
+                i % 2 === 0 ? "bg-white" : "bg-gray-50"
+              }`}
+            >
+              {row.map((cell, j) => (
+                <td key={j} className="p-2 border-b">
+                  {cell}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }

@@ -9,7 +9,7 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const router = useRouter();
+  const navigate = useRouter();
 
   if (loading) {
     return <LoadingScreen />;
@@ -27,7 +27,7 @@ export default function Login() {
     });
 
     if (res.ok) {
-      router.push("/admin"); // Redirect if login succeeds
+      navigate.push("/admin");
       setLoading(false);
     } else {
       setLoading(false);

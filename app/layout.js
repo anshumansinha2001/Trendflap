@@ -1,5 +1,7 @@
 import { Outfit } from "next/font/google";
 import "./globals.css";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -33,7 +35,10 @@ export default function RootLayout({ children }) {
         <meta name="msapplication-TileColor" content="#2d89ef" />
         <meta name="theme-color" content="#ffffff" />
       </head>
-      <body className={outfit.className}>{children}</body>
+      <body className={outfit.className}>
+        {children}
+        <ToastContainer position="top-right" autoClose={3000} />
+      </body>
     </html>
   );
 }

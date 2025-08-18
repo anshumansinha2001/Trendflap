@@ -11,10 +11,7 @@ export async function GET() {
     const blogs = await BlogModel.find().sort({ createdAt: -1 });
     return NextResponse.json(blogs, { status: 200 });
   } catch (err) {
-    return NextResponse.json(
-      { error: "Failed to fetch blogs" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: err.message }, { status: 500 });
   }
 }
 
@@ -67,9 +64,6 @@ export async function POST(req) {
     return NextResponse.json(newBlog, { status: 201 });
   } catch (err) {
     console.error("Error creating blog:", err);
-    return NextResponse.json(
-      { error: "Failed to create blog" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: err.message }, { status: 500 });
   }
 }

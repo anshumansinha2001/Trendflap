@@ -5,21 +5,20 @@ import { NextResponse } from "next/server";
 import { writeFile } from "fs/promises";
 import path from "path";
 
+// GET blog by slug
 export async function GET(req, { params }) {
   await connectDB();
   try {
-    const blog = await BlogModel.findById(params.id);
+    const blog = await BlogModel.findOne({ slug: params.slug });
     if (!blog)
       return NextResponse.json({ error: "Blog not found" }, { status: 404 });
     return NextResponse.json(blog, { status: 200 });
   } catch (err) {
-    return NextResponse.json(
-      { error: "Failed to fetch blog" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: err.message }, { status: 500 });
   }
 }
 
+// UPDATE blog by slug
 export async function PUT(req, { params }) {
   await connectDB();
   try {
@@ -53,8 +52,8 @@ export async function PUT(req, { params }) {
       updateData.image = `/uploads/${fileName}`;
     }
 
-    const updatedBlog = await BlogModel.findByIdAndUpdate(
-      params.id,
+    const updatedBlog = await BlogModel.findOneAndUpdate(
+      { slug: params.slug },
       updateData,
       {
         new: true,
@@ -67,17 +66,15 @@ export async function PUT(req, { params }) {
     return NextResponse.json(updatedBlog, { status: 200 });
   } catch (err) {
     console.error("Error updating blog:", err);
-    return NextResponse.json(
-      { error: "Failed to update blog" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: err.message }, { status: 500 });
   }
 }
 
+// DELETE blog by slug
 export async function DELETE(req, { params }) {
   await connectDB();
   try {
-    const deletedBlog = await BlogModel.findByIdAndDelete(params.id);
+    const deletedBlog = await BlogModel.findOneAndDelete({ slug: params.slug });
     if (!deletedBlog)
       return NextResponse.json({ error: "Blog not found" }, { status: 404 });
 
@@ -86,9 +83,6 @@ export async function DELETE(req, { params }) {
       { status: 200 }
     );
   } catch (err) {
-    return NextResponse.json(
-      { error: "Failed to delete blog" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: err.message }, { status: 500 });
   }
 }

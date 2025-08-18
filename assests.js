@@ -1,4 +1,8 @@
+import adminPic from "@/public/admin.jpg";
+export { adminPic };
+
 // Dummy blog data (replace with API or DB later)
+
 export const blogsData = [
   {
     id: 1,

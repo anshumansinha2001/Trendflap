@@ -1,7 +1,8 @@
-// pages/about.jsx
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import NewsLetter from "@/components/NewsLetter";
+import { adminPic } from "@/assests";
+import Image from "next/image";
 
 export default function About() {
   return (
@@ -22,9 +23,14 @@ export default function About() {
       {/* About Me Section */}
       <section className="py-6 md:py-12 bg-white">
         <div className="max-w-5xl mx-auto px-4 grid md:grid-cols-2 gap-8 items-center">
-          {/* Image (Optional - Can be replaced with your photo) */}
-          <div className="bg-gray-200 h-64 rounded-lg flex items-center justify-center">
-            <span className="text-gray-500">Your Image Here</span>
+          <div className=" flex items-center justify-center">
+            <Image
+              src={adminPic}
+              alt="Admin"
+              width={400}
+              height={400}
+              className="bg-gray-200 w-50 md:w-80 rounded-lg"
+            />
           </div>
 
           {/* Bio */}
