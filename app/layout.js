@@ -8,36 +8,67 @@ const outfit = Outfit({
   weight: ["400", "500", "600", "700"],
 });
 
+// Enhanced metadata for SEO
 export const metadata = {
-  title: "Trendflap",
+  title: "Trendflap: AI, Tech, and Digital Marketing Trends",
   description:
-    "Explore the latest in AI, Tech & Digital Marketing with Trendflap.",
+    "Trendflap is a modern blog platform dedicated to exploring the latest trends in AI, Tech, and Digital Marketing. ",
+  keywords:
+    "Trendflap, AI, Tech, Digital Marketing, Blog, Trends, AI Trends, Tech Trends, Digital Marketing Trends",
+  author: "Anshuman Sinha",
+  openGraph: {
+    title: "Trendflap: AI, Tech, and Digital Marketing Trends",
+    description:
+      "Trendflap is a modern blog platform dedicated to exploring the latest trends in AI, Tech, and Digital Marketing. ",
+    url: `${process.env.NEXT_PUBLIC_DOMAIN}`,
+    type: "website",
+    images: [
+      {
+        url: `${process.env.NEXT_PUBLIC_DOMAIN}/favicon.ico`,
+        alt: "Trendflap Logo",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    site: "@your_twitter_handle",
+    title: "Trendflap",
+    description:
+      "Trendflap is a modern blog platform dedicated to exploring the latest trends in AI, Tech, and Digital Marketing. ",
+    image: `${process.env.NEXT_PUBLIC_DOMAIN}/favicon.ico`,
+  },
+  alternates: {
+    canonical: `${process.env.NEXT_PUBLIC_DOMAIN}`,
+  },
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <meta charSet="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/apple-touch-icon.png"
+        />
         <link
           rel="icon"
           type="image/png"
-          href="/favicon-32x32.png"
           sizes="32x32"
+          href="/favicon-32x32.png"
         />
         <link
           rel="icon"
           type="image/png"
-          href="/favicon-16x16.png"
           sizes="16x16"
+          href="/favicon-16x16.png"
         />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-        <meta name="msapplication-TileColor" content="#2d89ef" />
-        <meta name="theme-color" content="#ffffff" />
       </head>
       <body className={outfit.className}>
         {children}
-        <ToastContainer position="top-right" autoClose={3000} />
+        <ToastContainer position="top-right" autoClose={5000} />
       </body>
     </html>
   );

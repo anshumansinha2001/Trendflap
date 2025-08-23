@@ -183,7 +183,7 @@ export default function Navbar() {
                   Artificial Intelligence (AI)
                 </Link>
                 <Link
-                  href="/tech"
+                  href="/technology"
                   className="text-gray-600 hover:text-blue-600"
                   onClick={() => setIsOpen(false)}
                 >

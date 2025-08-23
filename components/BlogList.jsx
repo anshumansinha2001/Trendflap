@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import BlogCardSkeleton from "./BlogCardSkeleton";
-import { fetchBlogs } from "@/utils/api";
+import { fetchBlogs } from "@/lib/api";
 
 export default function BlogList() {
   const [blogs, setBlogs] = useState([]);
@@ -82,7 +82,9 @@ export default function BlogList() {
                   </Link>
 
                   {/* Published Date */}
-                  <p className="text-gray-500 text-sm mb-3">{blog.date}</p>
+                  <p className="text-gray-500 text-sm mb-3">
+                    {blog.updatedAt.slice(0, 10).split("-").reverse().join("-")}
+                  </p>
 
                   {/* Short Description / TLDR */}
                   {blog.tldr?.length > 0 && (

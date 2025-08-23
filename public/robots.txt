@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /_next/
+Disallow: /api/
+Disallow: /admin/
+Disallow: /private/
+
+# Sitemap URL
+Sitemap: https://trendflap.vercel.app/sitemap.xml

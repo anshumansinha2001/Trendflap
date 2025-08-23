@@ -2,27 +2,18 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import {
-  FiHome,
-  FiFileText,
-  FiUsers,
-  FiSettings,
-  FiBarChart2,
-  FiMenu,
-  FiPlus,
-  FiTrash2,
-  FiEdit,
-  FiMail,
-} from "react-icons/fi";
+import { FiMenu, FiPlus, FiTrash2, FiEdit } from "react-icons/fi";
 import Link from "next/link";
 import Image from "next/image";
 import { adminPic } from "@/assests";
+import Sidebar from "@/components/admin/Sidebar";
 
 export default function BlogAdminDashboard() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const router = useRouter();
 
   const handleLogout = async () => {
+    if (!confirm("Are you sure you want to Logout?")) return;
     await fetch("/api/admin/logout", { method: "POST" });
     router.push("/admin/auth");
   };
@@ -79,56 +70,12 @@ export default function BlogAdminDashboard() {
 
   return (
     <div className="flex h-screen bg-gray-50 overflow-hidden">
-      {/* Sidebar */}
-      <div
-        className={`fixed inset-y-0 left-0 transform bg-white shadow-lg w-64 transition-transform duration-300 z-50 
-        ${sidebarOpen ? "translate-x-0" : "-translate-x-64"} md:translate-x-0`}
-      >
-        <div className="flex items-center justify-between px-4 py-4 border-b border-gray-200 bg-gray-50">
-          <h1 className="text-xl font-bold text-gray-800">Admin Panel</h1>
-          <button
-            className="md:hidden text-gray-600 hover:text-gray-800"
-            onClick={() => setSidebarOpen(false)}
-          >
-            ✕
-          </button>
-        </div>
-
-        <nav className="mt-6 space-y-1">
-          <SidebarLink icon={<FiHome />} label="Home" href="/" />
-          <SidebarLink
-            icon={<FiFileText />}
-            label="Blogs"
-            href="/admin/blogs"
-          />
-          <SidebarLink
-            icon={<FiUsers />}
-            label="Subscribers"
-            href="/admin/subscribers"
-          />
-          <SidebarLink
-            icon={<FiMail />}
-            label="Messages"
-            href="/admin/messages"
-          />
-          <SidebarLink
-            icon={<FiBarChart2 />}
-            label="Analytics"
-            href="/admin/analytics"
-          />
-          <SidebarLink
-            icon={<FiSettings />}
-            label="Settings"
-            href="/admin/settings"
-          />
-          <button
-            onClick={handleLogout}
-            className="flex items-center gap-3 w-full text-left px-4 py-2 text-red-600 hover:bg-red-100 font-medium"
-          >
-            🚪 Logout
-          </button>
-        </nav>
-      </div>
+      {/* ✅ Sidebar Component */}
+      <Sidebar
+        sidebarOpen={sidebarOpen}
+        setSidebarOpen={setSidebarOpen}
+        handleLogout={handleLogout}
+      />
 
       {/* Main Content */}
       <div className="flex-1 flex flex-col md:ml-64 min-h-screen overflow-y-auto scrollbar-hidden">

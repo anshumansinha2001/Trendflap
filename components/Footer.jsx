@@ -56,7 +56,7 @@ export default function Footer() {
               </Link>
             </li>
             <li>
-              <Link href="/tech" className="hover:text-blue-400">
+              <Link href="/technology" className="hover:text-blue-400">
                 Technology
               </Link>
             </li>

@@ -1,10 +1,9 @@
 import connectDB from "@/lib/config/db";
 import BlogModel from "@/lib/models/BlogModel";
 import { NextResponse } from "next/server";
+import cloudinary from "@/lib/cloudinary";
 
-import { writeFile } from "fs/promises";
-import path from "path";
-
+// ✅ Get all blogs
 export async function GET() {
   await connectDB();
   try {
@@ -15,6 +14,7 @@ export async function GET() {
   }
 }
 
+// ✅ Create new blog safely
 export async function POST(req) {
   await connectDB();
   try {
@@ -25,45 +25,68 @@ export async function POST(req) {
     const metaTitle = formData.get("metaTitle");
     const metaDescription = formData.get("metaDescription");
     const category = formData.get("category");
+    const categorySlug = formData.get("categorySlug");
     const read = formData.get("read");
     const content = formData.get("content");
+    const author = formData.get("author");
+    const authorSlug = formData.get("authorSlug");
 
-    // Handle Image Upload
-    const file = formData.get("image");
-    let filePath = null;
-
-    if (file && file.name) {
-      const bytes = await file.arrayBuffer();
-      const buffer = Buffer.from(bytes);
-
-      const fileName = `${Date.now()}-${file.name}`;
-      filePath = path.join(process.cwd(), "public/uploads", fileName);
-
-      await writeFile(filePath, buffer);
-
-      filePath = `/uploads/${fileName}`; // relative path for frontend
-    }
-
-    const newBlog = new BlogModel({
+    // ✅ Step 1: Create blog first (without image)
+    let newBlog = new BlogModel({
       title,
       slug,
       metaTitle,
       metaDescription,
       category,
+      categorySlug,
       read,
       content,
-      image: filePath,
+      author,
+      authorSlug,
+      image: null, // no image yet
       imageAlt: formData.get("imageAlt"),
       isFeatured: formData.get("isFeatured") === "true",
-      tldr: formData.getAll("tldr"),
+      tldr: JSON.parse(formData.get("tldr") || "[]"),
       toc: JSON.parse(formData.get("toc") || "[]"),
       faq: JSON.parse(formData.get("faq") || "[]"),
     });
 
-    await newBlog.save();
+    await newBlog.save(); // if this fails → no image upload happens
+
+    // ✅ Step 2: Handle image only after successful blog save
+    const file = formData.get("image");
+    if (file && file.name) {
+      try {
+        const bytes = await file.arrayBuffer();
+        const buffer = Buffer.from(bytes);
+
+        const uploaded = await cloudinary.uploader.upload(
+          `data:${file.type};base64,${buffer.toString("base64")}`,
+          {
+            folder: "trendflap",
+            format: "webp",
+            resource_type: "image",
+          }
+        );
+
+        // ✅ Step 3: Update blog with Cloudinary image URL
+        newBlog.image = uploaded.secure_url;
+        await newBlog.save();
+      } catch (imgErr) {
+        console.error("❌ Image upload failed, rolling back blog:", imgErr);
+
+        // Rollback blog if image upload failed
+        await BlogModel.findByIdAndDelete(newBlog._id);
+        return NextResponse.json(
+          { error: "Image upload failed, blog rolled back." },
+          { status: 500 }
+        );
+      }
+    }
+
     return NextResponse.json(newBlog, { status: 201 });
   } catch (err) {
-    console.error("Error creating blog:", err);
+    console.error("❌ Error creating blog:", err.message);
     return NextResponse.json({ error: err.message }, { status: 500 });
   }
 }
