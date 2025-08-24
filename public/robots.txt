@@ -6,4 +6,4 @@ Disallow: /admin/
 Disallow: /private/
 
 # Sitemap URL
-Sitemap: https://trendflap.vercel.app/sitemap.xml
+Sitemap: https://www.trendflap.in/robots.txt
