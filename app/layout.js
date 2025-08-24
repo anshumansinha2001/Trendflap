@@ -2,6 +2,8 @@ import { Outfit } from "next/font/google";
 import "./globals.css";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -48,6 +50,11 @@ export default function RootLayout({ children }) {
       <head>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        {/* Google Search Console */}
+        <meta
+          name="google-site-verification"
+          content="51Ik3SNmw48dw3zaIJNB_3K1NrB2ANDPJK7mK6AAR84"
+        />
         <link
           rel="apple-touch-icon"
           sizes="180x180"
@@ -67,8 +74,10 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body className={outfit.className}>
-        {children}
+        <Analytics />
+        <SpeedInsights />
         <ToastContainer position="top-right" autoClose={5000} />
+        {children}
       </body>
     </html>
   );
