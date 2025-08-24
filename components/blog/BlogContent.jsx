@@ -71,7 +71,7 @@ export default function BlogContent({ category, slug }) {
     author: { "@type": "Person", name: blog.author },
     publisher: {
       "@type": "Organization",
-      name: "Your Brand Name",
+      name: "Trendflap",
       logo: { "@type": "ImageObject", url: `${domain}/logo.png` },
     },
     datePublished: blog.createdAt,
@@ -181,6 +181,8 @@ export default function BlogContent({ category, slug }) {
                 alt={blog.imageAlt || blog.title}
                 fill
                 priority
+                fetchPriority="high"
+                decoding="sync"
                 sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-cover rounded-lg"
               />
@@ -196,8 +198,8 @@ export default function BlogContent({ category, slug }) {
                   : "bg-gray-50 p-4 rounded-lg shadow-md"
               }
             >
-              <h3 className="text-xl font-semibold mb-2">Table of Contents</h3>
-              <ul className="list-decimal text-blue-600 pl-5 space-y-1">
+              <h2 className="text-xl font-semibold mb-2">Table of Contents</h2>
+              <ul className="list-decimal text-blue-600 pl-5 space-y-2.5">
                 {blog.toc?.map((item, idx) => (
                   <li key={idx}>
                     <Link href={`#${item.id}`} className="hover:underline">
@@ -214,8 +216,8 @@ export default function BlogContent({ category, slug }) {
                   : "hidden"
               }
             >
-              <h3 className="font-bold text-lg mb-2">TL;DR</h3>
-              <ul className="list-disc list-inside text-sm text-gray-700 space-y-1">
+              <h2 className="font-bold text-lg mb-2">TL;DR</h2>
+              <ul className="list-disc list-inside text-sm text-gray-700 space-y-2">
                 {blog.tldr.map((point, idx) => (
                   <li key={idx}>{point}</li>
                 ))}
