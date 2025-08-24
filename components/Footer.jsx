@@ -1,5 +1,6 @@
-// components/Footer.jsx
 import Link from "next/link";
+import Image from "next/image";
+import { trendflapLogo } from "@/assests";
 
 export default function Footer() {
   return (
@@ -7,7 +8,17 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
         {/* Logo & Tagline */}
         <div>
-          <h2 className="text-2xl font-bold text-white mb-3">Trendflap</h2>
+          <div className="flex items-center gap-3 mb-3">
+            {/* Small Logo */}
+            <Image
+              src={trendflapLogo} // <-- replace with your logo path (e.g. /assets/logo.png)
+              alt="Trendflap Logo"
+              width={40}
+              height={40}
+              className="rounded-full"
+            />
+            <h2 className="text-2xl font-bold text-white">Trendflap</h2>
+          </div>
           <p className="text-sm">
             Your daily dose of AI, Tech & Digital Marketing insights. Stay ahead
             of the trend with Trendflap.

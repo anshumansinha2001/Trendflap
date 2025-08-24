@@ -1,8 +1,11 @@
-import BlogContent from "@/components/BlogContent";
+import BlogContent from "@/components/blog/BlogContent";
+import Footer from "@/components/Footer";
+import Navbar from "@/components/Navbar";
+import NewsLetter from "@/components/NewsLetter";
 import { fetchBlogByCategoryAndSlug } from "@/lib/api";
 
 export async function generateMetadata({ params }) {
-  const { category, slug } = params;
+  const { category, slug } = await params;
   let blog;
 
   try {
@@ -48,6 +51,14 @@ export async function generateMetadata({ params }) {
   };
 }
 
-export default function BlogPage({ params }) {
-  return <BlogContent category={params.category} slug={params.slug} />;
+export default async function BlogPage({ params }) {
+  const { category, slug } = await params;
+  return (
+    <>
+      <Navbar />
+      <BlogContent category={category} slug={slug} />;
+      <NewsLetter />
+      <Footer />
+    </>
+  );
 }

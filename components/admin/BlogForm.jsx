@@ -26,7 +26,7 @@ export default function BlogForm({ initialData, onSubmit }) {
   const [authorSlugEdited, setAuthorSlugEdited] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  // ✅ Add imagePreview state
+  // ✅ imagePreview state
   const [imagePreview, setImagePreview] = useState(null);
 
   const [formData, setFormData] = useState({
@@ -34,8 +34,8 @@ export default function BlogForm({ initialData, onSubmit }) {
     slug: "",
     metaTitle: "",
     metaDescription: "",
-    category: "AI",
-    categorySlug: "ai",
+    category: "",
+    categorySlug: "",
     read: "2 min read",
     image: null,
     imageAlt: "",
@@ -51,14 +51,15 @@ export default function BlogForm({ initialData, onSubmit }) {
   // Load initial data (edit mode)
   useEffect(() => {
     if (initialData) {
-      setFormData({
-        ...formData,
+      setFormData((prev) => ({
+        ...prev,
         ...initialData,
+        category: initialData.category || prev.category,
+        categorySlug: slugify(initialData.category || prev.category), // regenerate
         image: null, // file can't be prefilled
-      });
-      setImagePreview(initialData.image || null); // ✅ show existing image
+      }));
+      setImagePreview(initialData.image || null);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initialData]);
 
   const metaTitleCount = useMemo(
@@ -70,16 +71,14 @@ export default function BlogForm({ initialData, onSubmit }) {
     [formData.metaDescription]
   );
 
-  // --- handlers ---
+  // --- handlers (functional updates everywhere) ---
   const handleChange = (e) => {
     const { name, value, type, checked, files } = e.target;
 
     if (type === "file") {
       const file = files?.[0] || null;
-      setFormData({ ...formData, [name]: file });
-      if (file) {
-        setImagePreview(URL.createObjectURL(file)); // ✅ preview upload
-      }
+      setFormData((prev) => ({ ...prev, [name]: file }));
+      if (file) setImagePreview(URL.createObjectURL(file));
       return;
     }
 
@@ -96,7 +95,7 @@ export default function BlogForm({ initialData, onSubmit }) {
     if (name === "slug") {
       setSlugEdited(true);
       const cleaned = slugify(value);
-      setFormData({ ...formData, slug: cleaned });
+      setFormData((prev) => ({ ...prev, slug: cleaned }));
       return;
     }
 
@@ -113,86 +112,93 @@ export default function BlogForm({ initialData, onSubmit }) {
     if (name === "authorSlug") {
       setAuthorSlugEdited(true);
       const cleaned = slugify(value);
-      setFormData({ ...formData, authorSlug: cleaned });
+      setFormData((prev) => ({ ...prev, authorSlug: cleaned }));
       return;
     }
 
     if (name === "category") {
-      setFormData({
-        ...formData,
+      setFormData((prev) => ({
+        ...prev,
         category: value,
-        categorySlug: slugify(value),
-      });
+        categorySlug: slugify(value), // ✅ derive fresh on change
+      }));
       return;
     }
 
     if (name === "metaTitle") {
       const limited = value.slice(0, 60);
-      setFormData({ ...formData, metaTitle: limited });
-      return;
-    }
-    if (name === "metaDescription") {
-      const limited = value.slice(0, 160);
-      setFormData({ ...formData, metaDescription: limited });
+      setFormData((prev) => ({ ...prev, metaTitle: limited }));
       return;
     }
 
-    if (type === "file") {
-      setFormData({ ...formData, [name]: files?.[0] || null });
+    if (name === "metaDescription") {
+      const limited = value.slice(0, 160);
+      setFormData((prev) => ({ ...prev, metaDescription: limited }));
       return;
     }
 
     if (type === "checkbox") {
-      setFormData({ ...formData, [name]: checked });
+      setFormData((prev) => ({ ...prev, [name]: checked }));
       return;
     }
 
-    setFormData({ ...formData, [name]: value });
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleArrayChange = (field, index, value) => {
-    const updated = [...formData[field]];
-    updated[index] = value;
-    setFormData({ ...formData, [field]: updated });
+    setFormData((prev) => {
+      const updated = [...prev[field]];
+      updated[index] = value;
+      return { ...prev, [field]: updated };
+    });
   };
 
   const handleFaqChange = (index, field, value) => {
-    const updated = [...formData.faq];
-    updated[index][field] = value;
-    setFormData({ ...formData, faq: updated });
+    setFormData((prev) => {
+      const updated = [...prev.faq];
+      updated[index] = { ...updated[index], [field]: value };
+      return { ...prev, faq: updated };
+    });
   };
 
   const handleTocChange = (index, field, value) => {
-    const updated = [...formData.toc];
-    if (field === "text") {
-      updated[index].text = value;
-      updated[index].id = slugify(value);
-    } else if (field === "id") {
-      updated[index].id = slugify(value);
-    }
-    setFormData((prev) => ({ ...prev, toc: updated }));
+    setFormData((prev) => {
+      const updated = [...prev.toc];
+      if (field === "text") {
+        updated[index] = {
+          ...updated[index],
+          text: value,
+          id: slugify(value),
+        };
+      } else if (field === "id") {
+        updated[index] = { ...updated[index], id: slugify(value) };
+      }
+      return { ...prev, toc: updated };
+    });
   };
 
   const addField = (field) => {
     if (field === "tldr") {
-      setFormData({ ...formData, tldr: [...formData.tldr, ""] });
+      setFormData((prev) => ({ ...prev, tldr: [...prev.tldr, ""] }));
     } else if (field === "faq") {
-      setFormData({
-        ...formData,
-        faq: [...formData.faq, { question: "", answer: "" }],
-      });
+      setFormData((prev) => ({
+        ...prev,
+        faq: [...prev.faq, { question: "", answer: "" }],
+      }));
     } else if (field === "toc") {
-      setFormData({
-        ...formData,
-        toc: [...formData.toc, { id: "", text: "" }],
-      });
+      setFormData((prev) => ({
+        ...prev,
+        toc: [...prev.toc, { id: "", text: "" }],
+      }));
     }
   };
 
   const removeField = (field, index) => {
-    const updated = [...formData[field]];
-    updated.splice(index, 1);
-    setFormData({ ...formData, [field]: updated });
+    setFormData((prev) => {
+      const updated = [...prev[field]];
+      updated.splice(index, 1);
+      return { ...prev, [field]: updated };
+    });
   };
 
   const handleSubmit = async (e) => {
@@ -248,7 +254,7 @@ export default function BlogForm({ initialData, onSubmit }) {
     }
   };
 
-  // --- UI (unchanged from your code, just wrapped with props) ---
+  // --- UI (unchanged) ---
   return (
     <div className="max-w-5xl mx-auto bg-white shadow-md rounded-lg p-6 md:p-8 my-6">
       {/* title */}
@@ -351,18 +357,23 @@ export default function BlogForm({ initialData, onSubmit }) {
           </h2>
           <div className="grid md:grid-cols-2 gap-4">
             <div>
-              <label className="block font-medium">Category</label>
+              <label className="block font-medium">Category*</label>
               <select
                 name="category"
                 value={formData.category}
                 onChange={handleChange}
                 className="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
               >
-                <option>AI</option>
-                <option>Technology</option>
-                <option>Digital Marketing</option>
+                <option value="" disabled hidden>
+                  Select Category
+                </option>
+                <option value="AI">AI</option>
+                <option value="Technology">Technology</option>
+                <option value="Digital Marketing">Digital Marketing</option>
               </select>
             </div>
+
             <div>
               <label className="block font-medium">Read Time</label>
               <input
@@ -384,7 +395,6 @@ export default function BlogForm({ initialData, onSubmit }) {
           <div className="grid md:grid-cols-2 gap-4">
             <div>
               <label className="block font-medium">
-                {" "}
                 {initialData ? "Replace Image (optional)" : "Upload Image*"}
               </label>
               <input
@@ -452,7 +462,10 @@ export default function BlogForm({ initialData, onSubmit }) {
             <button
               type="button"
               onClick={() =>
-                setFormData({ ...formData, isFeatured: !formData.isFeatured })
+                setFormData((prev) => ({
+                  ...prev,
+                  isFeatured: !prev.isFeatured,
+                }))
               }
               className={`relative inline-flex h-6 w-11 items-center rounded-full transition ${
                 formData.isFeatured ? "bg-blue-600" : "bg-gray-300"

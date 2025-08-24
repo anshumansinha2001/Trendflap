@@ -6,7 +6,7 @@ import { FiPlus, FiEdit, FiTrash2, FiEye } from "react-icons/fi";
 import Sidebar from "@/components/admin/Sidebar";
 import { deleteBlogByCategoryAndSlug, fetchBlogs } from "@/lib/api";
 import { toast } from "react-toastify";
-import LoadingScreen from "@/components/LoadingScreen";
+import Loading from "@/app/loading";
 
 export default function AdminBlogsPage() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -44,7 +44,7 @@ export default function AdminBlogsPage() {
     }
   };
 
-  if (loading) return <LoadingScreen />;
+  if (loading) return <Loading />;
 
   return (
     <div className="flex min-h-screen bg-gray-50">

@@ -1,18 +1,39 @@
+"use client";
+
 import Head from "next/head";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { blogsData } from "@/assests";
-import LatestBlogCard from "@/components/LatestBlogCard";
-import FeaturedBlogCard from "@/components/FeaturedBlogCard";
+import LatestBlogCard from "@/components/blog/LatestBlogCard";
+import FeaturedBlogCard from "@/components/blog/FeaturedBlogCard";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { fetchBlogs } from "@/lib/api";
 
 export default function AIPage() {
-  // Find blogs which catogory is AI
-  const aiBlogs = blogsData
-    .filter((blog) => blog.category === "AI")
-    .slice(0, 3);
+  const [blogsData, setBlogsData] = useState([]);
 
-  // Find featured 3 blogs
+  useEffect(() => {
+    const loadBlog = async () => {
+      try {
+        const allBlogs = await fetchBlogs();
+        if (!allBlogs) {
+          setBlogsData([]);
+        } else {
+          // Find blogs in "AI" category
+          setBlogsData(
+            allBlogs.filter((blog) => blog.category === "AI").slice(0, 3)
+          );
+        }
+      } catch (err) {
+        console.error("Failed to load blog:", err.message);
+        setBlogsData([]);
+      }
+    };
+
+    loadBlog();
+  }, []);
+
+  // Safely compute featured blogs from the AI subset
   const featuredBlogs = blogsData.filter((blog) => blog.isFeatured).slice(0, 3);
 
   return (
@@ -51,7 +72,7 @@ export default function AIPage() {
         {/* Table of Contents & TL;DR Section */}
         <section className="bg-gray-50 p-5 rounded-xl shadow-sm mb-8">
           <div className="max-w-5xl mx-auto flex flex-col md:flex-row gap-8">
-            {/* TOC (Right on desktop, Top on mobile) */}
+            {/* TOC */}
             <div className="flex-1 order-1 ">
               <h2 className="text-xl font-semibold text-gray-900 mb-3">
                 Table of Contents
@@ -95,7 +116,7 @@ export default function AIPage() {
               </ol>
             </div>
 
-            {/* TL;DR (Left on desktop, Bottom on mobile) */}
+            {/* TL;DR */}
             <div className="flex-1 order-2">
               <h2 className="text-xl font-semibold text-gray-900 mb-3">
                 TL;DR
@@ -296,7 +317,7 @@ export default function AIPage() {
         </article>
 
         {/* FAQs */}
-        <section id="faqs" className="mt-6">
+        <section id="faq" className="mt-6">
           <h2 className="text-2xl font-semibold mb-5">
             Frequently Asked Questions
           </h2>
@@ -329,27 +350,31 @@ export default function AIPage() {
           </div>
         </section>
 
-        {/* Latest AI Blogs Section */}
-        <section className="mt-14">
-          <h2 className="text-2xl font-semibold mb-5">Latest AI Blogs</h2>
-          <div className="grid md:grid-cols-3 gap-6">
-            {aiBlogs.map((blog, i) => (
-              <LatestBlogCard key={i} blog={blog} />
-            ))}
-          </div>
-        </section>
+        {/* Latest AI Blogs */}
+        {blogsData.length > 0 && (
+          <section className="mt-14">
+            <h2 className="text-2xl font-semibold mb-5">Latest AI Blogs</h2>
+            <div className="grid md:grid-cols-3 gap-6">
+              {blogsData.map((blog) => (
+                <LatestBlogCard key={blog._id} blog={blog} />
+              ))}
+            </div>
+          </section>
+        )}
 
         {/* Featured Blogs */}
-        <section className="not-prose mt-10">
-          <h3 className="text-2xl font-semibold text-gray-900 mb-4">
-            What&rsquo;s trending among readers today!
-          </h3>
-          <div className="grid md:grid-cols-3 gap-6">
-            {featuredBlogs.map((blog, i) => (
-              <FeaturedBlogCard key={i} blog={blog} />
-            ))}
-          </div>
-        </section>
+        {featuredBlogs.length > 0 && (
+          <section className="not-prose mt-10">
+            <h3 className="text-2xl font-semibold text-gray-900 mb-4">
+              What&rsquo;s trending among readers today!
+            </h3>
+            <div className="grid md:grid-cols-3 gap-6">
+              {featuredBlogs.map((blog) => (
+                <FeaturedBlogCard key={blog._id} blog={blog} />
+              ))}
+            </div>
+          </section>
+        )}
       </main>
 
       <Footer />

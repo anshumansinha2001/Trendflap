@@ -45,9 +45,9 @@ export default function Navbar() {
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex gap-6 items-center">
-          <Link href="/" className="text-gray-700 hover:text-blue-600">
+          {/* <Link href="/" className="text-gray-700 hover:text-blue-600">
             Home
-          </Link>
+          </Link> */}
           <Link href="/blog" className="text-gray-700 hover:text-blue-600">
             Blog
           </Link>
@@ -71,7 +71,7 @@ export default function Navbar() {
                   Artificial Intelligence (AI)
                 </Link>
                 <Link
-                  href="/tech"
+                  href="/technology"
                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                   onClick={() => setDropdownOpen(false)}
                 >
@@ -107,7 +107,7 @@ export default function Navbar() {
         <div className="hidden md:block">
           <input
             type="text"
-            placeholder="Search articles..."
+            placeholder="More fetaures coming soon..."
             className="px-3 py-1 border rounded-md text-sm focus:ring-2 focus:ring-blue-500"
           />
         </div>
@@ -124,13 +124,13 @@ export default function Navbar() {
       {/* Mobile Navigation Menu */}
       {isOpen && (
         <nav className="md:hidden flex flex-col gap-4 px-6 py-4 bg-white border-t border-gray-200">
-          <Link
+          {/* <Link
             href="/"
             className="text-gray-700 hover:text-blue-600"
             onClick={() => setIsOpen(false)}
           >
             Home
-          </Link>
+          </Link> */}
           <Link
             href="/blog"
             className="text-gray-700 hover:text-blue-600"

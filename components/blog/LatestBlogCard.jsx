@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import React from "react";
+import moment from "moment";
 
 const LatestBlogCard = ({ blog }) => {
   return (
@@ -16,6 +17,9 @@ const LatestBlogCard = ({ blog }) => {
         className="w-full h-48 rounded-lg mb-4 object-cover hover:opacity-90 transition"
       />
       <h3 className="text-xl font-semibold text-gray-900 mb-2">{blog.title}</h3>
+      <p className="text-gray-800 text-sm mb-3">
+        {moment(blog.updatedAt).fromNow()}
+      </p>
       <p className="text-gray-600 text-sm mb-4">{blog.metaDescription}</p>
       <p className="flex justify-between text-sm text-gray-600 font-medium">
         {blog.date}

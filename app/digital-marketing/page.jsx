@@ -1,18 +1,41 @@
+"use client";
+
 import Head from "next/head";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import LatestBlogCard from "@/components/LatestBlogCard";
-import { blogsData } from "@/assests";
-import FeaturedBlogCard from "@/components/FeaturedBlogCard";
+import LatestBlogCard from "@/components/blog/LatestBlogCard";
+import FeaturedBlogCard from "@/components/blog/FeaturedBlogCard";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { fetchBlogs } from "@/lib/api";
 
 export default function DigitalMarketingPage() {
-  // Find blogs which catogory is Digital Marketing
-  const dmBlogs = blogsData
-    .filter((blog) => blog.category === "Digital Marketing")
-    .slice(0, 3);
+  const [blogsData, setBlogsData] = useState([]);
 
-  // Find featured 3 blogs
+  useEffect(() => {
+    const loadBlog = async () => {
+      try {
+        const allBlogs = await fetchBlogs();
+        if (!allBlogs) {
+          setBlogsData([]);
+        } else {
+          // Find blogs in "Digital Marketing" category
+          setBlogsData(
+            allBlogs
+              .filter((blog) => blog.category === "Digital Marketing")
+              .slice(0, 3)
+          );
+        }
+      } catch (err) {
+        console.error("Failed to load blog:", err.message);
+        setBlogsData([]);
+      }
+    };
+
+    loadBlog();
+  }, []);
+
+  // Safely compute featured blogs
   const featuredBlogs = blogsData.filter((blog) => blog.isFeatured).slice(0, 3);
 
   return (
@@ -294,28 +317,32 @@ export default function DigitalMarketingPage() {
         </section>
 
         {/* Latest Digital Marketing Blogs */}
-        <section className="mt-14">
-          <h2 className="text-2xl font-semibold mb-5">
-            Latest Digital Marketing Blogs
-          </h2>
-          <div className="grid md:grid-cols-3 gap-6">
-            {dmBlogs.map((blog) => (
-              <LatestBlogCard key={blog.id} blog={blog} />
-            ))}
-          </div>
-        </section>
+        {blogsData.length > 0 && (
+          <section className="mt-14">
+            <h2 className="text-2xl font-semibold mb-5">
+              Latest Digital Marketing Blogs
+            </h2>
+            <div className="grid md:grid-cols-3 gap-6">
+              {blogsData.map((blog) => (
+                <LatestBlogCard key={blog._id} blog={blog} />
+              ))}
+            </div>
+          </section>
+        )}
 
         {/* Featured Digital Marketing Blogs */}
-        <section className="not-prose mt-10">
-          <h3 className="text-2xl font-semibold text-gray-900 mb-4">
-            What&rsquo;s trending among readers today!
-          </h3>
-          <div className="grid md:grid-cols-3 gap-6">
-            {featuredBlogs.map((blog) => (
-              <FeaturedBlogCard key={blog.id} blog={blog} />
-            ))}
-          </div>
-        </section>
+        {featuredBlogs.length > 0 && (
+          <section className="not-prose mt-10">
+            <h3 className="text-2xl font-semibold text-gray-900 mb-4">
+              What&rsquo;s trending among readers today!
+            </h3>
+            <div className="grid md:grid-cols-3 gap-6">
+              {featuredBlogs.map((blog) => (
+                <FeaturedBlogCard key={blog._id} blog={blog} />
+              ))}
+            </div>
+          </section>
+        )}
       </main>
 
       <Footer />

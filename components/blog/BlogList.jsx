@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import BlogCardSkeleton from "./BlogCardSkeleton";
+import moment from "moment";
 import { fetchBlogs } from "@/lib/api";
 
 export default function BlogList() {
@@ -82,8 +83,8 @@ export default function BlogList() {
                   </Link>
 
                   {/* Published Date */}
-                  <p className="text-gray-500 text-sm mb-3">
-                    {blog.updatedAt.slice(0, 10).split("-").reverse().join("-")}
+                  <p className="text-gray-800 text-sm mb-3">
+                    {moment(blog.updatedAt).fromNow()}
                   </p>
 
                   {/* Short Description / TLDR */}

@@ -1,8 +1,8 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import LoadingScreen from "@/components/LoadingScreen";
 import Link from "next/link";
+import Loading from "@/app/loading";
 
 export default function Login() {
   const [username, setUsername] = useState("");
@@ -12,7 +12,7 @@ export default function Login() {
   const navigate = useRouter();
 
   if (loading) {
-    return <LoadingScreen />;
+    return <Loading />;
   }
 
   const handleAdminLogin = async (e) => {

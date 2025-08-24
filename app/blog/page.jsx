@@ -1,6 +1,6 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import BlogList from "@/components/BlogList";
+import BlogList from "@/components/blog/BlogList";
 import NewsLetter from "@/components/NewsLetter";
 
 export default function Blog() {

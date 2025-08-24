@@ -1,8 +1,10 @@
 import adminPic from "@/public/admin.jpg";
+import trendflapLogo from "@/public/TrendflapLogo.png";
+
 export { adminPic };
+export { trendflapLogo };
 
-// Dummy blog data (replace with API or DB later)
-
+// Dummy blog data
 export const blogsData = [
   {
     id: 1,
@@ -52,8 +54,7 @@ export const blogsData = [
     faq: [
       {
         question: "What is AI in Digital Marketing?",
-        answer:
-          "AI in digital marketing refers to the use of artificial intelligence to analyze data, personalize content, and optimize ad campaigns.",
+        answer: `AI in digital marketing refers to the use of <a rel="nofollow" target="_blank" href="/ai/" class="internal-link"> artificial intelligence </a> to analyze data, personalize content, and optimize ad campaigns.`,
       },
       {
         question: "How can AI help in Digital Marketing?",

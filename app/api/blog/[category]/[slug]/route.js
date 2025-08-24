@@ -29,34 +29,37 @@ export async function PUT(req, { params }) {
   try {
     const formData = await req.formData();
 
-    const updateData = {
-      title: formData.get("title"),
-      slug: formData.get("slug"),
-      metaTitle: formData.get("metaTitle"),
-      metaDescription: formData.get("metaDescription"),
-      category: formData.get("category"),
-      read: formData.get("read"),
-      content: formData.get("content"),
-      author: formData.get("author"),
-      authorSlug: formData.get("authorSlug"),
-      imageAlt: formData.get("imageAlt"),
-      isFeatured: formData.get("isFeatured"),
-      tldr: JSON.parse(formData.get("tldr") || "[]"),
-      toc: JSON.parse(formData.get("toc") || "[]"),
-      faq: JSON.parse(formData.get("faq") || "[]"),
-    };
+    // --- Build updateData safely ---
+    const updateData = {};
 
-    let updatedBlog = await BlogModel.findOneAndUpdate(
-      { categorySlug: params.category, slug: params.slug },
-      updateData,
-      { new: true }
-    );
+    // Basic text fields
+    const fields = [
+      "title",
+      "slug",
+      "metaTitle",
+      "metaDescription",
+      "category",
+      "read",
+      "content",
+      "author",
+      "authorSlug",
+      "imageAlt",
+    ];
 
-    if (!updatedBlog) {
-      return NextResponse.json({ error: "Blog not found" }, { status: 404 });
-    }
+    fields.forEach((field) => {
+      const val = formData.get(field);
+      if (val !== null) updateData[field] = val;
+    });
 
-    // ✅ Handle image upload
+    // Arrays (parse JSON)
+    updateData.tldr = JSON.parse(formData.get("tldr") || "[]");
+    updateData.toc = JSON.parse(formData.get("toc") || "[]");
+    updateData.faq = JSON.parse(formData.get("faq") || "[]");
+
+    // Boolean conversion
+    updateData.isFeatured = formData.get("isFeatured") === "true";
+
+    // --- Handle image upload (if any) ---
     const file = formData.get("image");
     if (file && file.name) {
       const bytes = await file.arrayBuffer();
@@ -74,11 +77,25 @@ export async function PUT(req, { params }) {
           .end(buffer);
       });
 
-      updatedBlog = await BlogModel.findOneAndUpdate(
-        { categorySlug: params.category, slug: params.slug },
-        { image: uploadResponse.secure_url },
-        { new: true }
-      );
+      updateData.image = uploadResponse.secure_url;
+    }
+
+    // --- Ensure categorySlug updates too ---
+    if (updateData.category) {
+      updateData.categorySlug = updateData.category
+        .toLowerCase()
+        .replace(/\s+/g, "-");
+    }
+
+    // --- Update blog in one go ---
+    const updatedBlog = await BlogModel.findOneAndUpdate(
+      { categorySlug: params.category, slug: params.slug },
+      updateData,
+      { new: true }
+    );
+
+    if (!updatedBlog) {
+      return NextResponse.json({ error: "Blog not found" }, { status: 404 });
     }
 
     return NextResponse.json(updatedBlog, { status: 200 });

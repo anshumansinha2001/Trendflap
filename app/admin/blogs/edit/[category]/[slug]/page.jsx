@@ -5,7 +5,7 @@ import { useParams } from "next/navigation";
 import axios from "axios";
 import BlogForm from "@/components/admin/BlogForm";
 import { fetchBlogByCategoryAndSlug } from "@/lib/api";
-import LoadingScreen from "@/components/LoadingScreen";
+import Loading from "@/app/loading";
 
 export default function EditBlogPage() {
   const { category, slug } = useParams();
@@ -37,7 +37,7 @@ export default function EditBlogPage() {
   }, [category, slug]);
 
   if (loading) {
-    return <LoadingScreen />;
+    return <Loading />;
   }
 
   const handleUpdate = async (body) => {

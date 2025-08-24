@@ -20,30 +20,37 @@ export async function POST(req) {
   try {
     const formData = await req.formData();
 
+    // --- Extract fields ---
     const title = formData.get("title");
-    const slug = formData.get("slug");
-    const metaTitle = formData.get("metaTitle");
-    const metaDescription = formData.get("metaDescription");
+    let slug = formData.get("slug");
     const category = formData.get("category");
-    const categorySlug = formData.get("categorySlug");
-    const read = formData.get("read");
-    const content = formData.get("content");
-    const author = formData.get("author");
-    const authorSlug = formData.get("authorSlug");
+    let categorySlug = formData.get("categorySlug");
 
-    // ✅ Step 1: Create blog first (without image)
-    let newBlog = new BlogModel({
+    // --- Auto-generate slug if missing ---
+    if (!slug && title) {
+      slug = title
+        .toLowerCase()
+        .replace(/\s+/g, "-")
+        .replace(/[^a-z0-9-]/g, "");
+    }
+
+    // --- Auto-generate categorySlug if missing ---
+    if (!categorySlug && category) {
+      categorySlug = category.toLowerCase().replace(/\s+/g, "-");
+    }
+
+    const newBlog = new BlogModel({
       title,
       slug,
-      metaTitle,
-      metaDescription,
+      metaTitle: formData.get("metaTitle"),
+      metaDescription: formData.get("metaDescription"),
       category,
       categorySlug,
-      read,
-      content,
-      author,
-      authorSlug,
-      image: null, // no image yet
+      read: formData.get("read"),
+      content: formData.get("content"),
+      author: formData.get("author"),
+      authorSlug: formData.get("authorSlug"),
+      image: null, // placeholder until Cloudinary succeeds
       imageAlt: formData.get("imageAlt"),
       isFeatured: formData.get("isFeatured") === "true",
       tldr: JSON.parse(formData.get("tldr") || "[]"),
@@ -51,26 +58,35 @@ export async function POST(req) {
       faq: JSON.parse(formData.get("faq") || "[]"),
     });
 
-    await newBlog.save(); // if this fails → no image upload happens
+    // ✅ Save first (without image) so we have _id
+    await newBlog.save();
 
-    // ✅ Step 2: Handle image only after successful blog save
+    // --- Handle image if provided ---
     const file = formData.get("image");
     if (file && file.name) {
       try {
         const bytes = await file.arrayBuffer();
         const buffer = Buffer.from(bytes);
 
-        const uploaded = await cloudinary.uploader.upload(
-          `data:${file.type};base64,${buffer.toString("base64")}`,
-          {
-            folder: "trendflap",
-            format: "webp",
-            resource_type: "image",
-          }
-        );
+        // Cloudinary upload (stream-based for safety)
+        const uploadResponse = await new Promise((resolve, reject) => {
+          cloudinary.uploader
+            .upload_stream(
+              {
+                folder: "trendflap",
+                format: "webp",
+                resource_type: "image",
+              },
+              (err, result) => {
+                if (err) reject(err);
+                else resolve(result);
+              }
+            )
+            .end(buffer);
+        });
 
-        // ✅ Step 3: Update blog with Cloudinary image URL
-        newBlog.image = uploaded.secure_url;
+        // ✅ Update blog with image URL
+        newBlog.image = uploadResponse.secure_url;
         await newBlog.save();
       } catch (imgErr) {
         console.error("❌ Image upload failed, rolling back blog:", imgErr);

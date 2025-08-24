@@ -10,7 +10,7 @@ const outfit = Outfit({
 
 // Enhanced metadata for SEO
 export const metadata = {
-  title: "Trendflap: AI, Tech, and Digital Marketing Trends",
+  title: "Trendflap: AI, Technology & Digital Marketing Trends",
   description:
     "Trendflap is a modern blog platform dedicated to exploring the latest trends in AI, Tech, and Digital Marketing. ",
   keywords:

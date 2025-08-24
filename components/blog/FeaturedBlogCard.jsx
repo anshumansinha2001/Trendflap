@@ -1,3 +1,4 @@
+import moment from "moment";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -22,6 +23,9 @@ const FeaturedBlogCard = ({ blog }) => {
       </p>
       {/* Blog Title */}
       <h4 className="font-semibold mb-2">{blog.title}</h4>
+      <p className="text-gray-800 text-sm mb-3">
+        {moment(blog.updatedAt).fromNow()}
+      </p>
       <p className="text-sm text-gray-600">{blog.metaDescription}</p>
       <p className="flex justify-between text-sm text-gray-600 font-medium">
         {blog.date}

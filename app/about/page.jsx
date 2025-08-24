@@ -1,8 +1,9 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import NewsLetter from "@/components/NewsLetter";
-import { adminPic } from "@/assests";
+import { trendflapLogo } from "@/assests";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function About() {
   return (
@@ -25,8 +26,8 @@ export default function About() {
         <div className="max-w-5xl mx-auto px-4 grid md:grid-cols-2 gap-8 items-center">
           <div className=" flex items-center justify-center">
             <Image
-              src={adminPic}
-              alt="Admin"
+              src={trendflapLogo}
+              alt="Trendflap Logo"
               width={400}
               height={400}
               className="bg-gray-200 w-50 md:w-80 rounded-lg"
@@ -36,7 +37,14 @@ export default function About() {
           {/* Bio */}
           <div>
             <h2 className="text-2xl font-bold mb-4 text-gray-900">
-              Hi, I’m Anshuman Sinha 👋
+              Hi, I’m{" "}
+              <Link
+                href="/anshuman-sinha"
+                className="cursor-pointer underline underline-offset-2 hover:text-blue-600"
+              >
+                Anshuman Sinha
+              </Link>
+              👋
             </h2>
             <p className="text-gray-700 mb-4">
               I’m a <strong>Computer Science Engineer</strong> with a passion

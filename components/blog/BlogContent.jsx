@@ -3,15 +3,12 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import LatestBlogCard from "@/components/LatestBlogCard";
-import FeaturedBlogCard from "@/components/FeaturedBlogCard";
-import Navbar from "@/components/Navbar";
-import NewsLetter from "@/components/NewsLetter";
-import NotFound from "@/app/not-found";
+import LatestBlogCard from "@/components/blog/LatestBlogCard";
+import FeaturedBlogCard from "@/components/blog/FeaturedBlogCard";
 
 import { fetchBlogByCategoryAndSlug, fetchBlogs } from "@/lib/api";
-import LoadingScreen from "@/components/LoadingScreen";
-import Footer from "./Footer";
+import BlogPageSkeleton from "@/components/blog/BlogPageSkeleton";
+import BlogNotFound from "@/components/blog/BlogNotFound";
 
 export default function BlogContent({ category, slug }) {
   const [blog, setBlog] = useState(null);
@@ -52,8 +49,8 @@ export default function BlogContent({ category, slug }) {
     loadBlog();
   }, [category, slug]);
 
-  if (loading) return <LoadingScreen />;
-  if (!blog) return <NotFound />;
+  if (loading) return <BlogPageSkeleton />;
+  if (!blog) return <BlogNotFound slug={slug} />;
 
   const date = new Date(blog.updatedAt);
   const formatted = date.toLocaleDateString("en-US", {
@@ -134,8 +131,6 @@ export default function BlogContent({ category, slug }) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
-      <Navbar />
-
       <main className="max-w-7xl mx-auto px-4 py-6 lg:py-12">
         {/* Inject JSON-LD */}
         <script
@@ -180,16 +175,15 @@ export default function BlogContent({ category, slug }) {
             </div>
 
             {/* Blog Image */}
-            <div className="mb-8">
-              {blog.image && (
-                <Image
-                  src={blog.image}
-                  alt={blog.imageAlt || blog.title}
-                  width={800}
-                  height={400}
-                  className="w-full h-60 md:h-100 object-cover rounded-xl shadow-md"
-                />
-              )}
+            <div className="relative w-full h-60 md:h-100">
+              <Image
+                src={blog.image}
+                alt={blog.imageAlt || blog.title}
+                fill
+                priority
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-cover rounded-lg"
+              />
             </div>
           </section>
 
@@ -232,7 +226,7 @@ export default function BlogContent({ category, slug }) {
 
         {/* Blog Content */}
         <article
-          className="mt-6 lg:mt-0 prose prose-lg max-w-none text-gray-800"
+          className="blog-content mt-6 lg:mt-0 prose prose-lg max-w-none text-gray-800"
           dangerouslySetInnerHTML={{ __html: blog.content }}
         ></article>
 
@@ -292,10 +286,6 @@ export default function BlogContent({ category, slug }) {
           </section>
         )}
       </main>
-
-      <NewsLetter />
-
-      <Footer />
     </>
   );
 }

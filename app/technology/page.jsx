@@ -1,18 +1,44 @@
+"use client";
+
 import Head from "next/head";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { blogsData } from "@/assests";
-import LatestBlogCard from "@/components/LatestBlogCard";
-import FeaturedBlogCard from "@/components/FeaturedBlogCard";
+import LatestBlogCard from "@/components/blog/LatestBlogCard";
+import FeaturedBlogCard from "@/components/blog/FeaturedBlogCard";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { fetchBlogs } from "@/lib/api";
 
 export default function TechnologyPage() {
-  // Find blogs which catogory is Technology
-  const techBlogs = blogsData
-    .filter((blog) => blog.category === "Tech")
-    .slice(0, 3);
+  const [blogsData, setBlogsData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  // Find featured 3 blogs
+  useEffect(() => {
+    const loadBlog = async () => {
+      try {
+        const allBlogs = await fetchBlogs();
+        if (!allBlogs) {
+          setBlogsData([]);
+        } else {
+          // Find blogs in "Technology" category
+          setBlogsData(
+            allBlogs
+              .filter((blog) => blog.category === "Technology")
+              .slice(0, 3)
+          );
+        }
+      } catch (err) {
+        console.error("Failed to load blog:", err.message);
+        setBlogsData([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadBlog();
+  }, []);
+
+  // Safely compute featured blogs from the fetched set
   const featuredBlogs = blogsData.filter((blog) => blog.isFeatured).slice(0, 3);
 
   return (
@@ -105,11 +131,9 @@ export default function TechnologyPage() {
                 <li>
                   ⚙️ Tech is now a core growth engine, not just IT support.
                 </li>
-                <li>
-                  🚀 Cloud is the future of IT, not just cloud computing.{" "}
-                </li>
-                <li>☁️ DevOps is the future of IT, not just IT automation. </li>
-                <li>🔐 Security is a top priority, not just IT security. </li>
+                <li>🚀 Cloud is the future of IT, not just cloud computing.</li>
+                <li>☁️ DevOps is the future of IT, not just IT automation.</li>
+                <li>🔐 Security is a top priority, not just IT security.</li>
               </ul>
             </div>
           </div>
@@ -283,28 +307,32 @@ export default function TechnologyPage() {
         </section>
 
         {/* Latest Technology Blogs Section */}
-        <section className="mt-14">
-          <h2 className="text-2xl font-semibold mb-5">
-            Latest Technology Blogs
-          </h2>
-          <div className="grid md:grid-cols-3 gap-6">
-            {techBlogs.map((blog) => (
-              <LatestBlogCard key={blog.id} blog={blog} />
-            ))}
-          </div>
-        </section>
+        {blogsData.length > 0 && (
+          <section className="mt-14">
+            <h2 className="text-2xl font-semibold mb-5">
+              Latest Technology Blogs
+            </h2>
+            <div className="grid md:grid-cols-3 gap-6">
+              {blogsData.map((blog) => (
+                <LatestBlogCard key={blog._id} blog={blog} />
+              ))}
+            </div>
+          </section>
+        )}
 
         {/* Featured Technology Blogs */}
-        <section className="not-prose mt-10">
-          <h3 className="text-2xl font-semibold text-gray-900 mb-4">
-            What&rsquo;s trending among readers today!
-          </h3>
-          <div className="grid md:grid-cols-3 gap-6">
-            {featuredBlogs.map((blog) => (
-              <FeaturedBlogCard key={blog.id} blog={blog} />
-            ))}
-          </div>
-        </section>
+        {featuredBlogs.length > 0 && (
+          <section className="not-prose mt-10">
+            <h3 className="text-2xl font-semibold text-gray-900 mb-4">
+              What&rsquo;s trending among readers today!
+            </h3>
+            <div className="grid md:grid-cols-3 gap-6">
+              {featuredBlogs.map((blog) => (
+                <FeaturedBlogCard key={blog._id} blog={blog} />
+              ))}
+            </div>
+          </section>
+        )}
       </main>
 
       <Footer />
