@@ -6,6 +6,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import GATrack from "@/components/GATrack";
 import Script from "next/script";
+import { Suspense } from "react";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -101,7 +102,9 @@ export default function RootLayout({ children }) {
                 gtag('config', '${GA_ID}', { send_page_view: false });
               `}
             </Script>
-            <GATrack />
+            <Suspense fallback={null}>
+              <GATrack />
+            </Suspense>
           </>
         ) : null}
       </body>
