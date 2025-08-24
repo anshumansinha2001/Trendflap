@@ -1,7 +1,7 @@
-// pages/contact.jsx
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Link from "next/link";
+import * as gtag from "@/lib/gtag";
 
 export default function Contact() {
   return (
@@ -54,6 +54,15 @@ export default function Contact() {
               <button
                 type="submit"
                 className="px-6 py-2 bg-blue-600 text-white rounded-md font-semibold hover:bg-blue-700 transition"
+                onClick={() =>
+                  gtag.event({
+                    action: "cta_click",
+                    params: {
+                      label: "Contact Form Submit",
+                      page: window.location.pathname,
+                    },
+                  })
+                }
               >
                 Send Message
               </button>

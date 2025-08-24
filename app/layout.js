@@ -4,13 +4,15 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import GATrack from "@/components/GATrack";
+import Script from "next/script";
 
 const outfit = Outfit({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
 });
 
-// Enhanced metadata for SEO
+// SEO Metadata
 export const metadata = {
   title: "Trendflap: AI, Technology & Digital Marketing Trends",
   description:
@@ -45,6 +47,8 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+  const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
+
   return (
     <html lang="en">
       <head>
@@ -53,7 +57,7 @@ export default function RootLayout({ children }) {
         {/* Google Search Console */}
         <meta
           name="google-site-verification"
-          content="51Ik3SNmw48dw3zaIJNB_3K1NrB2ANDPJK7mK6AAR84"
+          content={process.env.NEXT_PUBLIC_GOOGLE_SEARCH_CONSOLE}
         />
         <link
           rel="apple-touch-icon"
@@ -72,12 +76,34 @@ export default function RootLayout({ children }) {
           sizes="16x16"
           href="/favicon-16x16.png"
         />
+        <link rel="manifest" href="/site.webmanifest" />
       </head>
       <body className={outfit.className}>
         <Analytics />
         <SpeedInsights />
         <ToastContainer position="top-right" autoClose={5000} />
         {children}
+
+        {GA_ID ? (
+          <>
+            {/* GA loader */}
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+              strategy="afterInteractive"
+            />
+            {/* GA init */}
+            <Script id="ga-init" strategy="afterInteractive">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                window.gtag = gtag;
+                gtag('js', new Date());
+                gtag('config', '${GA_ID}', { send_page_view: false });
+              `}
+            </Script>
+            <GATrack />
+          </>
+        ) : null}
       </body>
     </html>
   );

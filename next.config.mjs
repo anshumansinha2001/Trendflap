@@ -12,15 +12,15 @@ const nextConfig = {
       },
     ];
   },
-  async redirects() {
-    return [
-      {
-        source: "/",
-        destination: "/blog",
-        permanent: false, // temporary redirect (302)
-      },
-    ];
-  },
+  // async redirects() {
+  //   return [
+  //     {
+  //       source: "/",
+  //       destination: "/blog",
+  //       permanent: false, // temporary redirect (302)
+  //     },
+  //   ];
+  // },
 };
 
 export default nextConfig;
