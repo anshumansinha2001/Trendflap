@@ -190,7 +190,7 @@ export default function BlogContent({ category, slug }) {
           </section>
 
           {/* Sidebar (TOC + TLDR) */}
-          <div className="lg:col-span-2 space-y-6">
+          <div className="lg:col-span-2 space-y-6 mt-2 lg:mt-0">
             <div
               className={
                 blog.toc.length === 0

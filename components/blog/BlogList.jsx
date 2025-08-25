@@ -10,7 +10,7 @@ export default function BlogList() {
   const [filter, setFilter] = useState("All");
   const [loading, setLoading] = useState(true);
 
-  const categories = ["All", "AI", "Tech", "Digital Marketing"];
+  const categories = ["All", "AI", "Technology", "Digital Marketing"];
 
   // Fetch blogs from API (by utils/api.js)
   useEffect(() => {

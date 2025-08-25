@@ -3,6 +3,39 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Link from "next/link";
 
+export const metadata = {
+  title: "Privacy Policy | Trendflap",
+  description:
+    "Learn about how Trendflap collects, uses, and protects your personal information when you visit our website. Your privacy matters to us.",
+  robots: {
+    index: true,
+    follow: true,
+  },
+  openGraph: {
+    title: "Privacy Policy | Trendflap",
+    description:
+      "Our privacy policy explains how we collect, use, and protect your information. Your privacy matters to us at Trendflap.",
+    url: "https://www.trendflap.in/privacy-policy",
+    type: "website",
+    // It's good practice to have an OG image for every important page,
+    // even for a policy page.
+    images: [
+      {
+        url: "https://www.trendflap.in/TrendflapLogo.png",
+        width: 1200,
+        height: 630,
+        alt: "Trendflap Privacy Policy",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Privacy Policy | Trendflap",
+    description:
+      "Our privacy policy explains how we collect, use, and protect your information. Your privacy matters to us at Trendflap.",
+  },
+};
+
 export default function PrivacyPolicy() {
   return (
     <>

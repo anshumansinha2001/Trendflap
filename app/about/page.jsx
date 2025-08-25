@@ -5,6 +5,42 @@ import { trendflapLogo } from "@/assests";
 import Image from "next/image";
 import Link from "next/link";
 
+export const metadata = {
+  title: "About | Trendflap",
+  description:
+    "Learn more about me, my journey, and why I started Trendflap – your go-to hub for AI, Technology, and Digital Marketing insights.",
+  keywords: [
+    "Trendflap about us",
+    "Anshuman Sinha",
+    "AI blog founder",
+    "technology blog",
+    "digital marketing expert",
+    "SEO consultant",
+  ],
+  openGraph: {
+    title: "About Trendflap",
+    description:
+      "Learn more about our mission to simplify AI, technology, and digital marketing concepts for everyone.",
+    url: "https://www.trendflap.in/about",
+    type: "website",
+    images: [
+      {
+        url: "https://www.trendflap.in/TrendflapLogo.png",
+        width: 1200,
+        height: 630,
+        alt: "Trendflap - About Us",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "About Trendflap",
+    description:
+      "Learn more about our mission to simplify AI, technology, and digital marketing concepts for everyone.",
+    images: ["https://www.trendflap.in/TrendflapLogo.png"],
+  },
+};
+
 export default function About() {
   return (
     <>

@@ -4,6 +4,42 @@ import { adminPic } from "@/assests";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
+export const metadata = {
+  title: "Anshuman Sinha | Trendflap Founder",
+  description:
+    "Learn more about Anshuman Sinha, the software engineer and content creator behind Trendflap, and his passion for sharing knowledge about AI, technology, and digital marketing.",
+  keywords: [
+    "Anshuman Sinha",
+    "Anshuman Singh",
+    "Trendflap founder",
+    "software engineer",
+    "content creator",
+    "AI",
+    "digital marketing",
+  ],
+  openGraph: {
+    title: "Anshuman Sinha | Trendflap Founder",
+    description:
+      "Learn more about Anshuman Sinha, the software engineer and content creator behind Trendflap, and his passion for sharing knowledge about AI, technology, and digital marketing.",
+    url: "https://www.trendflap.in/anshuman-sinha",
+    type: "profile",
+    images: [
+      {
+        url: "https://www.trendflap.in/admin.jpg",
+        height: 630,
+        alt: "Anshuman Sinha",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Anshuman Sinha | Trendflap Founder",
+    description:
+      "Learn more about Anshuman Sinha, the software engineer and content creator behind Trendflap, and his passion for sharing knowledge about AI, technology, and digital marketing.",
+    images: ["https://www.trendflap.in/admin.jpg"],
+  },
+};
+
 export default function AnshumanSingh() {
   return (
     <>

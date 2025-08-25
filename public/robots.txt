@@ -1,7 +1,0 @@
-User-agent: *
-Allow: /
-Disallow: /api/
-Disallow: /admin/
-
-# Sitemap URL
-Sitemap: https://www.trendflap.in/robots.txt
