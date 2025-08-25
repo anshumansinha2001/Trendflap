@@ -34,6 +34,9 @@ export const metadata = {
     description:
       "Our privacy policy explains how we collect, use, and protect your information. Your privacy matters to us at Trendflap.",
   },
+  alternates: {
+    canonical: "https://www.trendflap.in/privacy-policy",
+  },
 };
 
 export default function PrivacyPolicy() {

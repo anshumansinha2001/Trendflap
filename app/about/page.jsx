@@ -39,6 +39,9 @@ export const metadata = {
       "Learn more about our mission to simplify AI, technology, and digital marketing concepts for everyone.",
     images: ["https://www.trendflap.in/TrendflapLogo.png"],
   },
+  alternates: {
+    canonical: "https://www.trendflap.in/about",
+  },
 };
 
 export default function About() {

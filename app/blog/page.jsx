@@ -35,6 +35,9 @@ export const metadata = {
     description:
       "Explore the latest insights, trends, and strategies in AI, Technology, and Digital Marketing from our blog.",
   },
+  alternates: {
+    canonical: "https://www.trendflap.in/blog",
+  },
 };
 
 export default function Blog() {

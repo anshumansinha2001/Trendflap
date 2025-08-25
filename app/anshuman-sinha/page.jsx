@@ -38,6 +38,9 @@ export const metadata = {
       "Learn more about Anshuman Sinha, the software engineer and content creator behind Trendflap, and his passion for sharing knowledge about AI, technology, and digital marketing.",
     images: ["https://www.trendflap.in/admin.jpg"],
   },
+  alternates: {
+    canonical: "https://www.trendflap.in/anshuman-sinha",
+  },
 };
 
 export default function AnshumanSingh() {

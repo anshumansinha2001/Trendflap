@@ -4,6 +4,46 @@ import Footer from "@/components/Footer";
 import Link from "next/link";
 import * as gtag from "@/lib/gtag";
 
+const metadata = {
+  title: "Contact Us - Trendflap",
+  description:
+    "Got questions, ideas, or collaboration requests? We'd love to hear from you. Let's connect and grow together in the world of AI, Tech, and Digital Marketing.",
+  keywords: [
+    "Contact Trendflap",
+    "Get in Touch",
+    "AI blog founder",
+    "technology blog",
+    "digital marketing expert",
+    "SEO consultant",
+  ],
+  openGraph: {
+    title: "Contact Us - Trendflap",
+    description:
+      "Got questions, ideas, or collaboration requests? We'd love to hear from you. Let's connect and grow together in the world of AI, Tech, and Digital Marketing.",
+    url: "https://www.trendflap.in/contact",
+    type: "website",
+    images: [
+      {
+        url: "https://www.trendflap.in/TrendflapLogo.png",
+        width: 1200,
+        height: 630,
+        alt: "Trendflap Contact Page",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    site: "@your_twitter_handle",
+    title: "Contact Us - Trendflap",
+    description:
+      "Got questions, ideas, or collaboration requests? We'd love to hear from you. Let's connect and grow together in the world of AI, Tech, and Digital Marketing.",
+    image: "https://www.trendflap.in/TrendflapLogo.png",
+  },
+  alternates: {
+    canonical: "https://www.trendflap.in/contact",
+  },
+};
+
 export default function Contact() {
   return (
     <>
