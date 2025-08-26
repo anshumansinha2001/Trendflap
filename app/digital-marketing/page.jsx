@@ -1,57 +1,70 @@
-"use client";
-
-import Head from "next/head";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import LatestBlogCard from "@/components/blog/LatestBlogCard";
 import FeaturedBlogCard from "@/components/blog/FeaturedBlogCard";
 import Link from "next/link";
-import { useEffect, useState } from "react";
 import { fetchBlogs } from "@/lib/api";
 
-export default function DigitalMarketingPage() {
-  const [blogsData, setBlogsData] = useState([]);
+export const metadata = {
+  title: "Digital Marketing Blogs & Insights | Trendflap",
+  description:
+    "Master Digital Marketing with our 2025 playbooks — SEO, content strategy, paid ads, email funnels, and analytics. Learn step-by-step workflows to grow your business.",
+  keywords: [
+    "digital marketing",
+    "SEO",
+    "content marketing",
+    "paid ads",
+    "social media marketing",
+    "marketing automation",
+    "email marketing",
+  ],
+  openGraph: {
+    title: "Digital Marketing Blogs & Insights | Trendflap",
+    description:
+      "Master Digital Marketing with our 2025 playbooks — SEO, content strategy, paid ads, email funnels, and analytics. Learn step-by-step workflows to grow your business.",
+    url: "https://trendflap.com/digital-marketing",
+    type: "website",
+    images: [
+      {
+        url: "https://trendflap.com/TrendflapLogo.png",
+        width: 1200,
+        height: 630,
+        alt: "Digital Marketing Blogs & Insights | Trendflap",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Digital Marketing Blogs & Insights | Trendflap",
+    description:
+      "Master Digital Marketing with our 2025 playbooks — SEO, content strategy, paid ads, email funnels, and analytics.",
+    images: ["https://trendflap.com/TrendflapLogo.png"],
+  },
+  alternates: {
+    canonical: "https://trendflap.com/digital-marketing",
+  },
+};
 
-  useEffect(() => {
-    const loadBlog = async () => {
-      try {
-        const allBlogs = await fetchBlogs();
-        if (!allBlogs) {
-          setBlogsData([]);
-        } else {
-          // Find blogs in "Digital Marketing" category
-          setBlogsData(
-            allBlogs
-              .filter((blog) => blog.category === "Digital Marketing")
-              .slice(0, 3)
-          );
-        }
-      } catch (err) {
-        console.error("Failed to load blog:", err.message);
-        setBlogsData([]);
-      }
-    };
+export default async function DigitalMarketingPage() {
+  let allBlogs = [];
+  try {
+    allBlogs = await fetchBlogs();
+  } catch (error) {
+    console.error("❌ Failed to fetch blogs:", error);
+  }
 
-    loadBlog();
-  }, []);
+  const blogsData = allBlogs
+    ? allBlogs
+        .filter((blog) => blog.category === "Digital Marketing")
+        .slice(0, 3)
+    : [];
 
-  // Safely compute featured blogs
-  const featuredBlogs = blogsData.filter((blog) => blog.isFeatured).slice(0, 3);
+  const featuredBlogs = allBlogs
+    ? allBlogs.filter((blog) => blog.isFeatured).slice(0, 3)
+    : [];
 
   return (
     <>
-      <Head>
-        <title>Digital Marketing Blogs & Insights | Trendflap</title>
-        <meta
-          name="description"
-          content="Master Digital Marketing with our 2025 playbooks — SEO, content strategy, paid ads, email funnels, and analytics. Learn step-by-step workflows to grow your business."
-        />
-        <meta
-          name="keywords"
-          content="digital marketing, SEO, content marketing, paid ads, social media marketing, marketing automation, email marketing"
-        />
-      </Head>
-
       <Navbar />
 
       <main className="max-w-5xl mx-auto px-6 py-6 md:py-10">

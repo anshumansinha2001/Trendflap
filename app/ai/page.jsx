@@ -1,55 +1,71 @@
-"use client";
-
-import Head from "next/head";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import LatestBlogCard from "@/components/blog/LatestBlogCard";
 import FeaturedBlogCard from "@/components/blog/FeaturedBlogCard";
 import Link from "next/link";
-import { useEffect, useState } from "react";
 import { fetchBlogs } from "@/lib/api";
 
-export default function AIPage() {
-  const [blogsData, setBlogsData] = useState([]);
+export const metadata = {
+  title: "AI | Trendflap - The AI Blog for Digital Marketing and Technology",
+  description:
+    "Explore the latest trends and insights in AI, digital marketing, and technology with Trendflap's dedicated AI blog.",
+  keywords: [
+    "AI",
+    "Artificial Intelligence",
+    "Digital Marketing",
+    "Technology",
+    "Machine Learning",
+    "Deep Learning",
+    "AI Trends",
+    "AI Applications",
+    "AI in Marketing",
+    "AI Tools",
+  ],
+  openGraph: {
+    title: "AI | Trendflap - The AI Blog for Digital Marketing and Technology",
+    description:
+      "Explore the latest trends and insights in AI, digital marketing, and technology with Trendflap's dedicated AI blog.",
+    url: "https://trendflap.com/ai",
+    type: "website",
+    images: [
+      {
+        url: "https://trendflap.com/TrendflapLogo.png",
+        width: 1200,
+        height: 630,
+        alt: "AI | Trendflap - The AI Blog for Digital Marketing and Technology",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "AI | Trendflap - The AI Blog for Digital Marketing and Technology",
+    description:
+      "Explore the latest trends and insights in AI, digital marketing, and technology with Trendflap's dedicated AI blog.",
+    images: ["https://trendflap.com/TrendflapLogo.png"],
+  },
+  alternates: {
+    canonical: "https://trendflap.com/ai",
+  },
+};
 
-  useEffect(() => {
-    const loadBlog = async () => {
-      try {
-        const allBlogs = await fetchBlogs();
-        if (!allBlogs) {
-          setBlogsData([]);
-        } else {
-          // Find blogs in "AI" category
-          setBlogsData(
-            allBlogs.filter((blog) => blog.category === "AI").slice(0, 3)
-          );
-        }
-      } catch (err) {
-        console.error("Failed to load blog:", err.message);
-        setBlogsData([]);
-      }
-    };
+export default async function AIPage() {
+  let allBlogs = [];
+  try {
+    allBlogs = await fetchBlogs();
+  } catch (error) {
+    console.error("❌ Failed to fetch blogs:", error);
+  }
 
-    loadBlog();
-  }, []);
+  const blogsData = allBlogs
+    ? allBlogs.filter((blog) => blog.category === "AI").slice(0, 3)
+    : [];
 
-  // Safely compute featured blogs from the AI subset
-  const featuredBlogs = blogsData.filter((blog) => blog.isFeatured).slice(0, 3);
+  const featuredBlogs = allBlogs
+    ? allBlogs.filter((blog) => blog.isFeatured).slice(0, 3)
+    : [];
 
   return (
     <>
-      <Head>
-        <title>Artificial Intelligence Blogs & Insights | Trendflap</title>
-        <meta
-          name="description"
-          content="Explore the latest in Artificial Intelligence — guides, workflows, tools, and insights for 2025. Learn AI for SEO, automation, content creation, and more."
-        />
-        <meta
-          name="keywords"
-          content="AI, Artificial Intelligence, AI tools, AI SEO, AI automation, AI content creation, AI workflows"
-        />
-      </Head>
-
       <Navbar />
 
       <main className="max-w-5xl mx-auto px-6 py-6 md:py-10">

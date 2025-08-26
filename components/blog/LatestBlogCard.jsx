@@ -14,7 +14,7 @@ const LatestBlogCard = ({ blog }) => {
         alt={blog.imageAlt || blog.title}
         width={500}
         height={500}
-        className="w-full h-48 rounded-lg mb-4 object-cover hover:opacity-90 transition"
+        className="w-full h-48 rounded-lg mb-4 object-fill hover:opacity-90 transition"
       />
       <h3 className="text-xl font-semibold text-gray-900 mb-2">{blog.title}</h3>
       <p className="text-gray-800 text-sm mb-3">

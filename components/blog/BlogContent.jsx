@@ -184,13 +184,13 @@ export default function BlogContent({ category, slug }) {
                 fetchPriority="high"
                 decoding="sync"
                 sizes="(max-width: 768px) 100vw, 50vw"
-                className="object-cover rounded-lg"
+                className="object-fill rounded-lg"
               />
             </div>
           </section>
 
           {/* Sidebar (TOC + TLDR) */}
-          <div className="lg:col-span-2 space-y-6 mt-2 lg:mt-0">
+          <div className="lg:col-span-2 space-y-6 mt-4 lg:mt-0">
             <div
               className={
                 blog.toc.length === 0
@@ -228,7 +228,7 @@ export default function BlogContent({ category, slug }) {
 
         {/* Blog Content */}
         <article
-          className="blog-content mt-6 lg:mt-0 prose prose-lg max-w-none text-gray-800"
+          className="blog-content mt-6 prose prose-lg max-w-none text-gray-800"
           dangerouslySetInnerHTML={{ __html: blog.content }}
         ></article>
 

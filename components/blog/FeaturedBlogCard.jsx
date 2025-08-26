@@ -15,7 +15,7 @@ const FeaturedBlogCard = ({ blog }) => {
         alt={blog.imageAlt || blog.title}
         width={500}
         height={500}
-        className="w-full h-48 rounded-lg mb-4 object-cover hover:opacity-90 transition"
+        className="w-full h-48 rounded-lg mb-4 object-fill hover:opacity-90 transition"
       />
       {/* Category Tag */}
       <p className="inline-block mb-3 px-3 py-1 text-xs font-medium text-blue-600 bg-blue-100 rounded-full ">

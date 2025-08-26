@@ -1,60 +1,70 @@
-"use client";
-
-import Head from "next/head";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import LatestBlogCard from "@/components/blog/LatestBlogCard";
 import FeaturedBlogCard from "@/components/blog/FeaturedBlogCard";
 import Link from "next/link";
-import { useEffect, useState } from "react";
 import { fetchBlogs } from "@/lib/api";
 
-export default function TechnologyPage() {
-  const [blogsData, setBlogsData] = useState([]);
-  const [loading, setLoading] = useState(true);
+export const metadata = {
+  title: "Technology Insights & IT Trends | Trendflap",
+  description:
+    "Stay ahead with the latest technology insights — software development, cloud computing, cybersecurity, IT infrastructure, and emerging tech trends for 2025.",
+  keywords: [
+    "Technology",
+    "IT",
+    "software development",
+    "cloud computing",
+    "cybersecurity",
+    "IT infrastructure",
+    "tech trends",
+  ],
+  openGraph: {
+    title: "Technology Insights & IT Trends | Trendflap",
+    description:
+      "Stay ahead with the latest technology insights — software development, cloud computing, cybersecurity, IT infrastructure, and emerging tech trends for 2025.",
+    url: "https://www.trendflap.com/technology",
+    siteName: "Trendflap",
+    images: [
+      {
+        url: "https://www.trendflap.com/TrendflapLogo.png",
+        width: 1200,
+        height: 630,
+        alt: "Technology Insights & IT Trends | Trendflap",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Technology Insights & IT Trends | Trendflap",
+    description:
+      "Stay ahead with the latest technology insights — software development, cloud computing, cybersecurity, IT infrastructure, and emerging tech trends for 2025.",
+    images: ["https://www.trendflap.com/TrendflapLogo.png"],
+    site: "@trendflap",
+    creator: "@trendflap",
+  },
+  alternates: {
+    canonical: "https://www.trendflap.com/technology",
+  },
+};
 
-  useEffect(() => {
-    const loadBlog = async () => {
-      try {
-        const allBlogs = await fetchBlogs();
-        if (!allBlogs) {
-          setBlogsData([]);
-        } else {
-          // Find blogs in "Technology" category
-          setBlogsData(
-            allBlogs
-              .filter((blog) => blog.category === "Technology")
-              .slice(0, 3)
-          );
-        }
-      } catch (err) {
-        console.error("Failed to load blog:", err.message);
-        setBlogsData([]);
-      } finally {
-        setLoading(false);
-      }
-    };
+export default async function TechnologyPage() {
+  let allBlogs = [];
+  try {
+    allBlogs = await fetchBlogs();
+  } catch (error) {
+    console.error("❌ Failed to fetch blogs:", error);
+  }
 
-    loadBlog();
-  }, []);
+  const blogsData = allBlogs
+    ? allBlogs.filter((blog) => blog.category === "Technology").slice(0, 3)
+    : [];
 
-  // Safely compute featured blogs from the fetched set
-  const featuredBlogs = blogsData.filter((blog) => blog.isFeatured).slice(0, 3);
+  const featuredBlogs = allBlogs
+    ? allBlogs.filter((blog) => blog.isFeatured).slice(0, 3)
+    : [];
 
   return (
     <>
-      <Head>
-        <title>Technology Insights & IT Trends | Trendflap</title>
-        <meta
-          name="description"
-          content="Stay ahead with the latest technology insights — software development, cloud computing, cybersecurity, IT infrastructure, and emerging tech trends for 2025."
-        />
-        <meta
-          name="keywords"
-          content="Technology, IT, software development, cloud computing, cybersecurity, IT infrastructure, tech trends"
-        />
-      </Head>
-
       <Navbar />
 
       <main className="max-w-5xl mx-auto px-6 py-6 md:py-10">
