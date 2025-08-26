@@ -1,7 +1,10 @@
-"use client";
-import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import Link from "next/link";
+
+export const metadata = {
+  title: "404 - Page Not Found | Trendflap",
+  description: "Oops! The page you are looking for doesn't exist.",
+};
 
 export default function NotFound() {
   return (

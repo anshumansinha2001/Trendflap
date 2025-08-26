@@ -7,10 +7,6 @@ const nextConfig = {
   async rewrites() {
     return [
       {
-        source: "/sitemap_index.xml",
-        destination: "/sitemap.xml",
-      },
-      {
         source: "/blogs",
         destination: "/blog",
       },

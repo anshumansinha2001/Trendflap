@@ -4,21 +4,22 @@ import Navbar from "@/components/Navbar";
 import NewsLetter from "@/components/NewsLetter";
 import { fetchBlogByCategoryAndSlug } from "@/lib/api";
 
+import { notFound } from "next/navigation";
+
 export async function generateMetadata({ params }) {
-  const { category, slug } = await params;
+  const { category, slug } = params;
   let blog;
 
   try {
     blog = await fetchBlogByCategoryAndSlug(category, slug);
   } catch (error) {
-    console.error("Error fetching metadata:", error);
+    console.error("Error fetching metadata:", error); // If the fetch fails, it's treated as a not-found page.
+    notFound();
   }
 
   if (!blog) {
-    return {
-      title: "Post not found | Trendflap",
-      description: "The article you are looking for does not exist.",
-    };
+    // If no blog post is returned, this is a 404 page.
+    notFound();
   }
 
   const metaTitle = blog.metaTitle || blog.title;
