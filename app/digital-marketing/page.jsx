@@ -22,11 +22,11 @@ export const metadata = {
     title: "Digital Marketing Blogs & Insights | Trendflap",
     description:
       "Master Digital Marketing with our 2025 playbooks — SEO, content strategy, paid ads, email funnels, and analytics. Learn step-by-step workflows to grow your business.",
-    url: "https://trendflap.com/digital-marketing",
+    url: "https://trendflap.in/digital-marketing",
     type: "website",
     images: [
       {
-        url: "https://trendflap.com/TrendflapLogo.png",
+        url: "https://trendflap.in/TrendflapLogo.png",
         width: 1200,
         height: 630,
         alt: "Digital Marketing Blogs & Insights | Trendflap",
@@ -38,10 +38,10 @@ export const metadata = {
     title: "Digital Marketing Blogs & Insights | Trendflap",
     description:
       "Master Digital Marketing with our 2025 playbooks — SEO, content strategy, paid ads, email funnels, and analytics.",
-    images: ["https://trendflap.com/TrendflapLogo.png"],
+    images: ["https://trendflap.in/TrendflapLogo.png"],
   },
   alternates: {
-    canonical: "https://trendflap.com/digital-marketing",
+    canonical: "https://www.trendflap.in/digital-marketing",
   },
 };
 

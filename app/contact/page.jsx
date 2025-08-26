@@ -81,10 +81,10 @@ export default function Contact() {
               <li>
                 📧 <span className="font-medium">Email:</span>{" "}
                 <Link
-                  href="mailto:hello@trendflap.com"
+                  href="mailto:hello@trendflap.in"
                   className="text-blue-600 hover:underline"
                 >
-                  hello@trendflap.com
+                  hello@trendflap.in
                 </Link>
               </li>
               <li>

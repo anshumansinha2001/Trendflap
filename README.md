@@ -1,6 +1,6 @@
 # 🚀 Trendflap
 
-[**Trendflap**](https://trendflap.com/) is a modern blog platform built with [Next.js](https://nextjs.org/), dedicated to exploring the latest trends in **Artificial Intelligence**, **Technology**, and **Digital Marketing**. It’s designed to deliver fast, SEO-optimized, and mobile-friendly content to a global audience.
+[**Trendflap**](https://trendflap.in/) is a modern blog platform built with [Next.js](https://nextjs.org/), dedicated to exploring the latest trends in **Artificial Intelligence**, **Technology**, and **Digital Marketing**. It’s designed to deliver fast, SEO-optimized, and mobile-friendly content to a global audience.
 
 <!-- ![Trendflap Banner](https://your-image-url.com/banner.png) -->
 
@@ -152,8 +152,8 @@ This project is licensed under the [MIT License](LICENSE).
 
 ## 📫 Contact
 
-- 🌐 Website: [https://trendflap.com](https://trendflap.com) <!-- Replace with your real domain -->
-- 📧 Email: [contact@trendflap.com](mailto:contact@trendflap.com)
+- 🌐 Website: [https://trendflap.in](https://trendflap.in) <!-- Replace with your real domain -->
+- 📧 Email: [contact@trendflap.in](mailto:contact@trendflap.in)
 - 🐙 GitHub: [@anshumansinha2001](https://github.com/anshumansinha2001)
 
 ---

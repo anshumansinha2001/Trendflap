@@ -25,11 +25,11 @@ export const metadata = {
     title: "AI | Trendflap - The AI Blog for Digital Marketing and Technology",
     description:
       "Explore the latest trends and insights in AI, digital marketing, and technology with Trendflap's dedicated AI blog.",
-    url: "https://trendflap.com/ai",
+    url: "https://trendflap.in/ai",
     type: "website",
     images: [
       {
-        url: "https://trendflap.com/TrendflapLogo.png",
+        url: "https://trendflap.in/TrendflapLogo.png",
         width: 1200,
         height: 630,
         alt: "AI | Trendflap - The AI Blog for Digital Marketing and Technology",
@@ -41,10 +41,10 @@ export const metadata = {
     title: "AI | Trendflap - The AI Blog for Digital Marketing and Technology",
     description:
       "Explore the latest trends and insights in AI, digital marketing, and technology with Trendflap's dedicated AI blog.",
-    images: ["https://trendflap.com/TrendflapLogo.png"],
+    images: ["https://trendflap.in/TrendflapLogo.png"],
   },
   alternates: {
-    canonical: "https://trendflap.com/ai",
+    canonical: "https://www.trendflap.in/ai",
   },
 };
 

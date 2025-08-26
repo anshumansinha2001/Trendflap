@@ -22,11 +22,11 @@ export const metadata = {
     title: "Technology Insights & IT Trends | Trendflap",
     description:
       "Stay ahead with the latest technology insights — software development, cloud computing, cybersecurity, IT infrastructure, and emerging tech trends for 2025.",
-    url: "https://www.trendflap.com/technology",
+    url: "https://www.trendflap.in/technology",
     siteName: "Trendflap",
     images: [
       {
-        url: "https://www.trendflap.com/TrendflapLogo.png",
+        url: "https://www.trendflap.in/TrendflapLogo.png",
         width: 1200,
         height: 630,
         alt: "Technology Insights & IT Trends | Trendflap",
@@ -38,12 +38,12 @@ export const metadata = {
     title: "Technology Insights & IT Trends | Trendflap",
     description:
       "Stay ahead with the latest technology insights — software development, cloud computing, cybersecurity, IT infrastructure, and emerging tech trends for 2025.",
-    images: ["https://www.trendflap.com/TrendflapLogo.png"],
+    images: ["https://www.trendflap.in/TrendflapLogo.png"],
     site: "@trendflap",
     creator: "@trendflap",
   },
   alternates: {
-    canonical: "https://www.trendflap.com/technology",
+    canonical: "https://www.trendflap.in/technology",
   },
 };
 

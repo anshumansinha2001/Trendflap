@@ -126,10 +126,10 @@ export default function PrivacyPolicy() {
               information stored with us. To exercise these rights, please
               contact us at{" "}
               <Link
-                href="mailto:hello@trendflap.com"
+                href="mailto:hello@trendflap.in"
                 className="text-blue-600 hover:underline"
               >
-                hello@trendflap.com
+                hello@trendflap.in
               </Link>
               .
             </p>
@@ -151,10 +151,10 @@ export default function PrivacyPolicy() {
               If you have any questions about this Privacy Policy, please email
               us at{" "}
               <Link
-                href="mailto:hello@trendflap.com"
+                href="mailto:hello@trendflap.in"
                 className="text-blue-600 hover:underline"
               >
-                hello@trendflap.com
+                hello@trendflap.in
               </Link>
               .
             </p>
