@@ -55,11 +55,6 @@ export default function RootLayout({ children }) {
       <head>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        {/* Google Search Console */}
-        <meta
-          name="google-site-verification"
-          content={process.env.NEXT_PUBLIC_GOOGLE_SEARCH_CONSOLE}
-        />
         <link
           rel="apple-touch-icon"
           sizes="180x180"

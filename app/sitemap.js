@@ -1,11 +1,10 @@
 import dbConnect from "@/lib/config/db";
 import BlogModel from "@/lib/models/BlogModel";
 
-// This tells Next.js to re-generate the sitemap every hour.
-export const revalidate = 3600;
+export const revalidate = 3600; // Re-generate every hour
 
 export default async function sitemap() {
-  const baseUrl = process.env.NEXT_PUBLIC_DOMAIN;
+  const baseUrl = process.env.NEXT_PUBLIC_DOMAIN || "https://www.trendflap.in";
 
   try {
     await dbConnect();
@@ -18,37 +17,37 @@ export default async function sitemap() {
     const staticPages = [
       {
         url: `${baseUrl}/`,
-        lastModified: new Date(),
+        lastModified: new Date().toISOString(),
         changeFrequency: "daily",
         priority: 1,
       },
       {
         url: `${baseUrl}/about`,
-        lastModified: new Date(),
+        lastModified: new Date().toISOString(),
         changeFrequency: "monthly",
         priority: 0.8,
       },
       {
         url: `${baseUrl}/contact`,
-        lastModified: new Date(),
+        lastModified: new Date().toISOString(),
         changeFrequency: "monthly",
         priority: 0.8,
       },
       {
         url: `${baseUrl}/blog`,
-        lastModified: new Date(),
+        lastModified: new Date().toISOString(),
         changeFrequency: "weekly",
         priority: 0.7,
       },
       {
         url: `${baseUrl}/privacy-policy`,
-        lastModified: new Date(),
+        lastModified: new Date().toISOString(),
         changeFrequency: "monthly",
         priority: 0.5,
       },
       {
         url: `${baseUrl}/anshuman-sinha`,
-        lastModified: new Date(),
+        lastModified: new Date().toISOString(),
         changeFrequency: "monthly",
         priority: 0.5,
       },
@@ -58,7 +57,7 @@ export default async function sitemap() {
     const categoriesSet = new Set(blogs.map((b) => b.categorySlug));
     const categoryUrls = Array.from(categoriesSet).map((cat) => ({
       url: `${baseUrl}/${cat}`,
-      lastModified: new Date(),
+      lastModified: new Date().toISOString(),
       changeFrequency: "weekly",
       priority: 0.6,
     }));
@@ -66,7 +65,7 @@ export default async function sitemap() {
     // 3. Dynamic Blog Posts
     const blogUrls = blogs.map((blog) => ({
       url: `${baseUrl}/${blog.categorySlug}/${blog.slug}`,
-      lastModified: blog.updatedAt || blog.createdAt,
+      lastModified: (blog.updatedAt || blog.createdAt).toISOString(),
       changeFrequency: "weekly",
       priority: 0.8,
     }));
@@ -74,7 +73,8 @@ export default async function sitemap() {
     return [...staticPages, ...categoryUrls, ...blogUrls];
   } catch (err) {
     console.error("Failed to fetch blogs for sitemap:", err);
-    // On error, return a minimal sitemap to avoid a complete failure.
-    return [{ url: baseUrl, lastModified: new Date() }];
+
+    // Return a minimal sitemap instead of failing completely
+    return [{ url: baseUrl, lastModified: new Date().toISOString() }];
   }
 }
