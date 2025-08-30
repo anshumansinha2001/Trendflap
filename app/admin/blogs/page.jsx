@@ -44,6 +44,15 @@ export default function AdminBlogsPage() {
     }
   };
 
+  const formatDate = (dateString) => {
+    if (!dateString) return "-";
+    return new Date(dateString).toLocaleDateString("en-GB", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    });
+  };
+
   if (loading) return <Loading />;
 
   return (
@@ -58,7 +67,7 @@ export default function AdminBlogsPage() {
           <h1 className="text-2xl font-bold text-gray-800">Manage Blogs</h1>
           <Link
             href="/admin/blogs/new"
-            className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition"
+            className="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-700 transition"
           >
             <FiPlus /> New Blog
           </Link>
@@ -69,7 +78,7 @@ export default function AdminBlogsPage() {
           {blogs.length === 0 ? (
             <div className="p-6 text-center text-gray-500">No blogs found.</div>
           ) : (
-            <table className="min-w-full table-auto border-collapse">
+            <table className="min-w-full table-auto border-collapse overflow-x-auto">
               <thead className="bg-gray-100">
                 <tr>
                   <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600">
@@ -78,9 +87,14 @@ export default function AdminBlogsPage() {
                   <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600">
                     Category
                   </th>
-
                   <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600">
-                    Date
+                    Tag
+                  </th>
+                  <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600">
+                    Created
+                  </th>
+                  <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600">
+                    Updated
                   </th>
                   <th className="px-6 py-3 text-center text-sm font-semibold text-gray-600">
                     Actions
@@ -94,36 +108,33 @@ export default function AdminBlogsPage() {
                     .replace(" ", "-")}/${blog.slug}`;
 
                   return (
-                    <tr
-                      key={blog.id || blog.slug} // ✅ ensure unique key
-                      className="hover:bg-gray-50"
-                    >
+                    <tr key={blog.id || blog.slug} className="hover:bg-gray-50">
                       <td className="px-6 py-4 text-gray-800 font-medium">
                         {blog.title}
                       </td>
                       <td className="px-6 py-4 text-gray-600 text-sm">
                         {blog.category}
                       </td>
-
                       <td className="px-6 py-4 text-gray-600 text-sm">
-                        {blog.updatedAt
-                          .split("T")[0]
-                          .split("-")
-                          .reverse()
-                          .join("/")
-                          .slice(0, 10)
-                          .replace(/-/g, "/")}
+                        {blog.categoryTag || "-"}
+                      </td>
+                      <td className="px-6 py-4 text-gray-600 text-sm">
+                        {formatDate(blog.createdAt)}
+                      </td>
+                      <td className="px-6 py-4 text-gray-600 text-sm">
+                        {formatDate(blog.updatedAt)}
                       </td>
                       <td className="px-6 py-4 flex justify-center gap-3">
-                        {/* ✅ Correct Blog Route */}
+                        {/* View */}
                         <Link
                           href={blogUrl}
-                          className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition"
+                          className="p-2 text-blue-500 hover:bg-blue-50 rounded-lg transition"
                           title="View"
                           target="_blank"
                         >
                           <FiEye />
                         </Link>
+                        {/* Edit */}
                         <Link
                           href={`/admin/blogs/edit/${blog.category
                             .toLowerCase()
@@ -133,6 +144,7 @@ export default function AdminBlogsPage() {
                         >
                           <FiEdit />
                         </Link>
+                        {/* Delete */}
                         <button
                           onClick={() => handleDelete(blog.category, blog.slug)}
                           className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition"

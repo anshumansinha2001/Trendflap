@@ -39,6 +39,7 @@ export async function PUT(req, { params }) {
       "metaTitle",
       "metaDescription",
       "category",
+      "categoryTag",
       "read",
       "content",
       "author",

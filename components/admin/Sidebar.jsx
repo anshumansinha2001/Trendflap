@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import {
   FiHome,
   FiFileText,
@@ -9,8 +10,30 @@ import {
   FiBarChart2,
   FiMail,
 } from "react-icons/fi";
+import { toast } from "react-toastify";
 
-export default function Sidebar({ sidebarOpen, setSidebarOpen, handleLogout }) {
+export default function Sidebar({ sidebarOpen, setSidebarOpen }) {
+  const navigate = useRouter();
+  const handleLogout = async () => {
+    const confirmed = confirm("Are you sure you want to logout?");
+    if (!confirmed) return;
+
+    try {
+      const res = await fetch("/api/admin/logout", { method: "POST" });
+
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.message || "Logout failed. Please try again.");
+      }
+
+      navigate.push("/admin/auth");
+      toast.success("Logged out successfully.");
+    } catch (error) {
+      console.error("Logout error:", error);
+      toast.error(error.message || "Something went wrong during logout.");
+    }
+  };
+
   return (
     <div
       className={`fixed inset-y-0 left-0 transform bg-white shadow-lg w-64 transition-transform duration-300 z-50 

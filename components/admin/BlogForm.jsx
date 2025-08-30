@@ -36,7 +36,8 @@ export default function BlogForm({ initialData, onSubmit }) {
     metaDescription: "",
     category: "",
     categorySlug: "",
-    read: "2 min read",
+    categoryTag: "",
+    read: "5 min read",
     image: null,
     imageAlt: "",
     author: "Anshuman Sinha",
@@ -56,6 +57,7 @@ export default function BlogForm({ initialData, onSubmit }) {
         ...initialData,
         category: initialData.category || prev.category,
         categorySlug: slugify(initialData.category || prev.category), // regenerate
+        categoryTag: initialData.categoryTag || prev.categoryTag,
         image: null, // file can't be prefilled
       }));
       setImagePreview(initialData.image || null);
@@ -121,6 +123,13 @@ export default function BlogForm({ initialData, onSubmit }) {
         ...prev,
         category: value,
         categorySlug: slugify(value), // ✅ derive fresh on change
+      }));
+      return;
+    }
+    if (name === "categoryTag") {
+      setFormData((prev) => ({
+        ...prev,
+        categoryTag: value,
       }));
       return;
     }
@@ -226,6 +235,7 @@ export default function BlogForm({ initialData, onSubmit }) {
       body.append("metaDescription", formData.metaDescription);
       body.append("category", formData.category);
       body.append("categorySlug", formData.categorySlug);
+      body.append("categoryTag", formData.categoryTag);
       body.append("read", formData.read);
       if (formData.image) body.append("image", formData.image);
       body.append("imageAlt", formData.imageAlt);
@@ -350,43 +360,7 @@ export default function BlogForm({ initialData, onSubmit }) {
             </div>
           </div>
         </div>
-        {/* Category & Read Time */}
-        <div>
-          <h2 className="text-lg font-bold text-gray-800 mb-3">
-            Meta & Read Time
-          </h2>
-          <div className="grid md:grid-cols-2 gap-4">
-            <div>
-              <label className="block font-medium">Category*</label>
-              <select
-                name="category"
-                value={formData.category}
-                onChange={handleChange}
-                className="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                required
-              >
-                <option value="" disabled hidden>
-                  Select Category
-                </option>
-                <option value="AI">AI</option>
-                <option value="Technology">Technology</option>
-                <option value="Digital Marketing">Digital Marketing</option>
-              </select>
-            </div>
 
-            <div>
-              <label className="block font-medium">Read Time</label>
-              <input
-                type="text"
-                name="read"
-                value={formData.read}
-                onChange={handleChange}
-                className="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="e.g., 7 min read"
-              />
-            </div>
-          </div>
-        </div>
         {/* Image Upload */}
         <div>
           <h2 className="text-lg font-bold text-gray-800 mb-3">
@@ -427,6 +401,113 @@ export default function BlogForm({ initialData, onSubmit }) {
             </div>
           </div>
         </div>
+
+        {/* Featured & Read Time */}
+        <div>
+          <h2 className="text-lg font-bold text-gray-800 mb-3">
+            Featured & Read Time
+          </h2>
+          <div className="grid md:grid-cols-2 gap-4">
+            <div>
+              <label className="block font-semibold mb-2">Featured</label>
+              <div className="flex items-center gap-3">
+                <button
+                  type="button"
+                  onClick={() =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      isFeatured: !prev.isFeatured,
+                    }))
+                  }
+                  className={`relative inline-flex h-6 w-11 items-center rounded-full transition ${
+                    formData.isFeatured ? "bg-blue-500" : "bg-gray-300"
+                  }`}
+                  aria-pressed={formData.isFeatured}
+                >
+                  <span
+                    className={`inline-block h-5 w-5 transform rounded-full bg-white transition ${
+                      formData.isFeatured ? "translate-x-5" : "translate-x-1"
+                    }`}
+                  />
+                </button>
+                <span className="text-sm text-gray-700">
+                  {formData.isFeatured
+                    ? "This blog will be featured"
+                    : "Not featured"}
+                </span>
+              </div>
+              {/* (kept original checkbox field for data binding if needed) */}
+              <input
+                type="checkbox"
+                name="isFeatured"
+                checked={formData.isFeatured}
+                onChange={handleChange}
+                className="hidden"
+              />
+            </div>
+            <div>
+              <label className="block font-medium">Read Time</label>
+              <input
+                type="text"
+                name="read"
+                value={formData.read}
+                onChange={handleChange}
+                className="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="e.g., 7 min read"
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Category & Category Tag */}
+        <div>
+          <h2 className="text-lg font-bold text-gray-800 mb-3">
+            Category & Category Tag
+          </h2>
+          <div className="grid md:grid-cols-2 gap-4">
+            <div>
+              <label className="block font-medium">Category*</label>
+              <select
+                name="category"
+                value={formData.category}
+                onChange={handleChange}
+                className="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
+              >
+                <option value="" disabled hidden>
+                  Select Category
+                </option>
+                <option value="AI">AI</option>
+                <option value="Technology">Technology</option>
+                <option value="Digital Marketing">Digital Marketing</option>
+                <option value="Other">Blog</option>
+              </select>
+            </div>
+
+            <div>
+              <label className="block font-medium">Category Tag</label>
+              <select
+                name="categoryTag"
+                value={formData.categoryTag}
+                onChange={handleChange}
+                className="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                <option value="" disabled hidden>
+                  Select Category Tag
+                </option>
+                <option value="AI Tools">AI Tools</option>
+                <option value="Machine Learning">Machine Learning</option>
+                <option value="SEO">SEO</option>
+                <option value="Content Marketing">Content Marketing</option>
+                <option value="Social Media">Social Media</option>
+                <option value="Automation">Automation</option>
+                <option value="Productivity">Productivity</option>
+                <option value="Tech Reviews">Tech Reviews</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
         {/* Author & Author Slug */}
         <div>
           <h2 className="text-lg font-bold text-gray-800 mb-3">Author</h2>
@@ -455,44 +536,7 @@ export default function BlogForm({ initialData, onSubmit }) {
             </div>
           </div>
         </div>
-        {/* Featured */}
-        <div>
-          <label className="block font-semibold mb-2">Featured</label>
-          <div className="flex items-center gap-3">
-            <button
-              type="button"
-              onClick={() =>
-                setFormData((prev) => ({
-                  ...prev,
-                  isFeatured: !prev.isFeatured,
-                }))
-              }
-              className={`relative inline-flex h-6 w-11 items-center rounded-full transition ${
-                formData.isFeatured ? "bg-blue-600" : "bg-gray-300"
-              }`}
-              aria-pressed={formData.isFeatured}
-            >
-              <span
-                className={`inline-block h-5 w-5 transform rounded-full bg-white transition ${
-                  formData.isFeatured ? "translate-x-5" : "translate-x-1"
-                }`}
-              />
-            </button>
-            <span className="text-sm text-gray-700">
-              {formData.isFeatured
-                ? "This blog will be featured"
-                : "Not featured"}
-            </span>
-          </div>
-          {/* (kept original checkbox field for data binding if needed) */}
-          <input
-            type="checkbox"
-            name="isFeatured"
-            checked={formData.isFeatured}
-            onChange={handleChange}
-            className="hidden"
-          />
-        </div>
+
         {/* TLDR */}
         <div>
           <label className="block font-semibold mb-2">TL;DR Points</label>
@@ -518,7 +562,7 @@ export default function BlogForm({ initialData, onSubmit }) {
           <button
             type="button"
             onClick={() => addField("tldr")}
-            className="text-blue-600 text-sm hover:underline"
+            className="text-blue-500 text-sm hover:underline"
           >
             + Add Point
           </button>
@@ -556,7 +600,7 @@ export default function BlogForm({ initialData, onSubmit }) {
           <button
             type="button"
             onClick={() => addField("toc")}
-            className="text-blue-600 text-sm hover:underline"
+            className="text-blue-500 text-sm hover:underline"
           >
             + Add TOC Item
           </button>
@@ -609,7 +653,7 @@ export default function BlogForm({ initialData, onSubmit }) {
           <button
             type="button"
             onClick={() => addField("faq")}
-            className="text-blue-600 text-sm hover:underline"
+            className="text-blue-500 text-sm hover:underline"
           >
             + Add FAQ
           </button>
@@ -619,7 +663,7 @@ export default function BlogForm({ initialData, onSubmit }) {
           <button
             type="submit"
             disabled={loading}
-            className="w-full md:w-auto bg-blue-600 text-white px-6 py-2.5 rounded-md hover:bg-blue-700 transition disabled:opacity-60 cursor-pointer"
+            className="w-full md:w-auto bg-blue-500 text-white px-6 py-2.5 rounded-md hover:bg-blue-700 transition disabled:opacity-60 cursor-pointer"
           >
             {loading ? "Saving..." : "Save Blog"}
           </button>

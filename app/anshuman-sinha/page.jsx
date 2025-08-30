@@ -61,7 +61,7 @@ export default function AnshumanSingh() {
           to learn and share my knowledge with others.
         </p>
         <Link href="/">
-          <p className="mt-4 text-blue-600 hover:underline">Back to Home</p>
+          <p className="mt-4 text-blue-500 hover:underline">Back to Home</p>
         </Link>
       </div>
       <Footer />

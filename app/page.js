@@ -24,7 +24,7 @@ export default function Home() {
         <div className="mt-6">
           <Link
             href="/blog"
-            className="px-6 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition"
+            className="px-6 py-3 bg-blue-500 text-white rounded-lg font-medium hover:bg-blue-700 transition"
           >
             Explore Our Blogs →
           </Link>
@@ -46,7 +46,7 @@ export default function Home() {
                 generative models. In-depth guides, case studies, and the latest
                 breakthroughs.
               </p>
-              <Link href="/ai" className="text-blue-600 font-medium">
+              <Link href="/ai" className="text-blue-500 font-medium">
                 Read More →
               </Link>
             </div>
@@ -58,7 +58,7 @@ export default function Home() {
                 practical tips to leverage technology for business and personal
                 growth.
               </p>
-              <Link href="/technology" className="text-blue-600 font-medium">
+              <Link href="/technology" className="text-blue-500 font-medium">
                 Read More →
               </Link>
             </div>
@@ -71,7 +71,7 @@ export default function Home() {
               </p>
               <Link
                 href="/digital-marketing"
-                className="text-blue-600 font-medium"
+                className="text-blue-500 font-medium"
               >
                 Read More →
               </Link>
@@ -123,7 +123,9 @@ export default function Home() {
                 key={cat}
                 className="px-4 py-2 bg-blue-100 text-blue-700 rounded-full cursor-pointer hover:bg-blue-200 transition"
               >
-                {cat}
+                <Link href={`/category/${cat.toLowerCase().replace(" ", "-")}`}>
+                  {cat}{" "}
+                </Link>
               </span>
             ))}
           </div>

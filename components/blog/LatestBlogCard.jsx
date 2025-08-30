@@ -6,8 +6,9 @@ import moment from "moment";
 const LatestBlogCard = ({ blog }) => {
   return (
     <Link
+      key={blog.slug}
       href={`/${blog.category.toLowerCase().replace(" ", "-")}/${blog.slug}`}
-      className="bg-white rounded-xl shadow hover:shadow-lg transition p-5 border"
+      className="bg-white rounded-xl shadow hover:shadow-lg transition p-2.5 border"
     >
       <Image
         src={blog.image}
@@ -23,7 +24,7 @@ const LatestBlogCard = ({ blog }) => {
       <p className="text-gray-600 text-sm mb-4">{blog.metaDescription}</p>
       <p className="flex justify-between text-sm text-gray-600 font-medium">
         {blog.date}
-        <span className="text-blue-600 hover:underline">Read More →</span>
+        <span className="text-blue-500 hover:underline">Read More →</span>
       </p>
     </Link>
   );

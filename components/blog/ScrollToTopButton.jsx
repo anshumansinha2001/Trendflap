@@ -16,7 +16,7 @@ export default function ScrollToTopButton() {
   return (
     <button
       onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-      className={`fixed bottom-6 right-6 z-50 px-4 py-3 text-2xl opacity-80 hover:opacity-100 cursor-pointer rounded-full bg-blue-600 text-white shadow-lg hover:bg-blue-700 transition ${
+      className={`fixed bottom-6 right-6 z-50 px-4 py-3 text-2xl opacity-80 hover:opacity-100 cursor-pointer rounded-full bg-blue-500 text-white shadow-lg hover:bg-blue-700 transition ${
         visible ? "block" : "hidden"
       }`}
       aria-label="Scroll to top"

@@ -82,7 +82,7 @@ export default function Contact() {
                 📧 <span className="font-medium">Email:</span>{" "}
                 <Link
                   href="mailto:hello@trendflap.in"
-                  className="text-blue-600 hover:underline"
+                  className="text-blue-500 hover:underline"
                 >
                   hello@trendflap.in
                 </Link>
@@ -92,7 +92,7 @@ export default function Contact() {
                 <Link
                   href="https://twitter.com/trendflap"
                   target="_blank"
-                  className="text-blue-600 hover:underline"
+                  className="text-blue-500 hover:underline"
                 >
                   @trendflap
                 </Link>
@@ -102,7 +102,7 @@ export default function Contact() {
                 <Link
                   href="https://linkedin.com/company/trendflap"
                   target="_blank"
-                  className="text-blue-600 hover:underline"
+                  className="text-blue-500 hover:underline"
                 >
                   Trendflap
                 </Link>
@@ -113,7 +113,7 @@ export default function Contact() {
       </section>
 
       {/* Call to Action */}
-      <section className="bg-blue-600 py-16 text-center text-white">
+      <section className="bg-blue-500 py-16 text-center text-white">
         <h2 className="text-3xl font-bold mb-4">
           Let’s Build Something Amazing 🚀
         </h2>

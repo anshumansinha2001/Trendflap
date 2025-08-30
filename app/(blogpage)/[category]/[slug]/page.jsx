@@ -187,13 +187,28 @@ export default async function BlogPage({ params }) {
               {blog.title}
             </h1>
 
-            {/* Blog Category */}
-            <Link
-              href={`/${blog.category.toLowerCase()}`}
-              className="px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-xs font-medium hover:bg-blue-200"
-            >
-              {blog.category}
-            </Link>
+            {/* Blog Category & Tag */}
+            <div className="flex flex-wrap items-center gap-2 text-sm text-gray-600 my-4 md:my-6">
+              <Link
+                href={`/${blog.category.toLowerCase()}`}
+                className="px-3 py-1 bg-blue-100 text-blue-500 rounded-full text-xs font-medium hover:bg-blue-200"
+              >
+                {blog.category}
+              </Link>
+              {blog.categoryTag && (
+                <>
+                  <span>{">>"}</span>
+                  <Link
+                    href={`/category/${blog.categoryTag
+                      .toLowerCase()
+                      .replace(/\s+/g, "-")}`}
+                    className="px-3 py-1 bg-blue-100 text-blue-500 rounded-full text-xs font-medium hover:bg-blue-200"
+                  >
+                    {blog.categoryTag}
+                  </Link>
+                </>
+              )}
+            </div>
 
             {/* Meta Info (Author + Date + Reading Time) */}
             <div className="flex flex-wrap items-center gap-2 text-sm text-gray-600 my-4 md:my-6">
@@ -201,7 +216,7 @@ export default async function BlogPage({ params }) {
                 By{" "}
                 <Link
                   href={`/${blog.authorSlug}`}
-                  className="underline hover:text-blue-600 transition underline-offset-2 cursor-pointer"
+                  className="underline hover:text-blue-500 transition underline-offset-2 cursor-pointer"
                 >
                   {blog.author}{" "}
                 </Link>
@@ -211,16 +226,18 @@ export default async function BlogPage({ params }) {
             </div>
 
             {/* Blog Image */}
-            <div className="relative w-full h-60 md:h-100">
+            <div className="relative w-full aspect-[16/9]">
               <Image
                 src={blog.image}
                 alt={blog.imageAlt || blog.title}
                 fill
                 priority
                 fetchPriority="high"
-                decoding="sync"
+                decoding="async"
+                placeholder="blur"
+                blurDataURL={blog.blurDataURL || "/TrendflapLogo.png"}
                 sizes="(max-width: 768px) 100vw, 50vw"
-                className="object-fill rounded-lg"
+                className="object-cover rounded-lg"
               />
             </div>
           </section>
@@ -235,10 +252,13 @@ export default async function BlogPage({ params }) {
               }
             >
               <h2 className="text-xl font-semibold mb-2">Table of Contents</h2>
-              <ul className="list-decimal text-blue-600 pl-5 space-y-2.5">
+              <ul className="list-decimal text-blue-500 pl-5 space-y-2.5">
                 {blog.toc?.map((item, idx) => (
                   <li key={idx}>
-                    <Link href={`#${item.id}`} className="hover:underline">
+                    <Link
+                      href={`#${item.id}`}
+                      className="hover:underline underline-offset-2"
+                    >
                       {item.text}
                     </Link>
                   </li>
@@ -271,7 +291,9 @@ export default async function BlogPage({ params }) {
         {/* Blog FAQs */}
         {blog.faq?.length > 0 && (
           <section className="mt-12">
-            <h2 className="text-2xl font-semibold mb-4">FAQs</h2>
+            <h2 className="text-2xl font-semibold mb-4 text-blue-500">
+              Frequently Asked Questions (FAQs)
+            </h2>
             <div className="space-y-4">
               {blog.faq.map((faq, idx) => (
                 <details key={idx} className="border p-4 rounded-lg">
@@ -290,7 +312,7 @@ export default async function BlogPage({ params }) {
         <div className="mt-12">
           <Link
             href="/blog"
-            className="inline-block px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+            className="inline-block px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-700 transition"
           >
             ← Return to Blogs
           </Link>

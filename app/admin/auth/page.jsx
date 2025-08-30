@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Loading from "@/app/loading";
+import { toast } from "react-toastify";
 
 export default function Login() {
   const [username, setUsername] = useState("");
@@ -26,13 +27,20 @@ export default function Login() {
       body: JSON.stringify({ username, password }),
     });
 
-    if (res.ok) {
-      navigate.push("/admin");
-      setLoading(false);
-    } else {
-      setLoading(false);
+    try {
       const data = await res.json();
-      setError(data.message);
+
+      if (res.ok) {
+        navigate.push("/admin/blogs");
+        toast.success("Login successful");
+      } else {
+        setError(data.message);
+      }
+    } catch (error) {
+      setError(error.message || "Something went wrong");
+      toast.error(error.message || "Something went wrong");
+    } finally {
+      setLoading(false);
     }
   };
 

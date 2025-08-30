@@ -90,7 +90,7 @@ export default async function DigitalMarketingPage() {
               <h2 className="text-xl font-semibold text-gray-900 mb-3">
                 Table of Contents
               </h2>
-              <ol className="list-decimal list-inside space-y-1 text-blue-600">
+              <ol className="list-decimal list-inside space-y-1 text-blue-500">
                 <li>
                   <Link href="#what-is-dm" className="hover:underline">
                     What Is Digital Marketing?

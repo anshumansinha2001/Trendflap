@@ -127,7 +127,7 @@ export default function PrivacyPolicy() {
               contact us at{" "}
               <Link
                 href="mailto:hello@trendflap.in"
-                className="text-blue-600 hover:underline"
+                className="text-blue-500 hover:underline"
               >
                 hello@trendflap.in
               </Link>
@@ -152,7 +152,7 @@ export default function PrivacyPolicy() {
               us at{" "}
               <Link
                 href="mailto:hello@trendflap.in"
-                className="text-blue-600 hover:underline"
+                className="text-blue-500 hover:underline"
               >
                 hello@trendflap.in
               </Link>

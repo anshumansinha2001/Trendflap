@@ -20,7 +20,7 @@ export default function BlogNotFound({ slug }) {
       {/* Return to Blogs Button */}
       <Link
         href="/blog"
-        className="mt-8 px-6 py-3 bg-blue-600 text-white rounded-lg shadow-lg hover:bg-blue-700 transition transform hover:-translate-y-1"
+        className="mt-8 px-6 py-3 bg-blue-500 text-white rounded-lg shadow-lg hover:bg-blue-700 transition transform hover:-translate-y-1"
       >
         ← Return to Blogs
       </Link>

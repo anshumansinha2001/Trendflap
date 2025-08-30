@@ -48,13 +48,18 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
-  const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
+  const GA_ID =
+    process.env.NODE_ENV === "production"
+      ? process.env.NEXT_PUBLIC_GA_ID
+      : null; // Only load GA in prod
 
   return (
     <html lang="en">
       <head>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        {/* Favicons */}
         <link
           rel="apple-touch-icon"
           sizes="180x180"
@@ -73,22 +78,48 @@ export default function RootLayout({ children }) {
           href="/favicon-16x16.png"
         />
         <link rel="manifest" href="/site.webmanifest" />
+
+        {/* Preconnect for GA (must be in <head>) */}
+        {GA_ID && (
+          <>
+            <link
+              rel="preconnect"
+              href="https://www.googletagmanager.com"
+              crossOrigin=""
+            />
+            <link
+              rel="preconnect"
+              href="https://www.google-analytics.com"
+              crossOrigin=""
+            />
+          </>
+        )}
+
+        {/* Cloudinary assets */}
+        <link rel="preconnect" href="https://res.cloudinary.com" />
       </head>
       <body className={outfit.className}>
+        {/* Vercel tools */}
         <Analytics />
         <SpeedInsights />
+
+        {/* Toasts */}
         <ToastContainer position="top-right" autoClose={5000} />
+
+        {/* Page Content */}
         {children}
 
-        {GA_ID ? (
+        {/* Google Analytics (only in prod) */}
+        {GA_ID && (
           <>
-            {/* GA loader */}
+            {/* GA loader (lazyOnload for better performance) */}
             <Script
               src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
-              strategy="afterInteractive"
+              strategy="lazyOnload"
             />
+
             {/* GA init */}
-            <Script id="ga-init" strategy="afterInteractive">
+            <Script id="ga-init" strategy="lazyOnload">
               {`
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){dataLayer.push(arguments);}
@@ -97,11 +128,13 @@ export default function RootLayout({ children }) {
                 gtag('config', '${GA_ID}', { send_page_view: false });
               `}
             </Script>
+
+            {/* Track SPA route changes */}
             <Suspense fallback={null}>
               <GATrack />
             </Suspense>
           </>
-        ) : null}
+        )}
       </body>
     </html>
   );

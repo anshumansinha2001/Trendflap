@@ -7,7 +7,7 @@ import cloudinary from "@/lib/cloudinary";
 export async function GET() {
   await connectDB();
   try {
-    const blogs = await BlogModel.find().sort({ createdAt: -1 });
+    const blogs = await BlogModel.find().sort({ updatedAt: -1 });
     return NextResponse.json(blogs, { status: 200 });
   } catch (err) {
     return NextResponse.json({ error: err.message }, { status: 500 });
@@ -46,6 +46,7 @@ export async function POST(req) {
       metaDescription: formData.get("metaDescription"),
       category,
       categorySlug,
+      categoryTag: formData.get("categoryTag"),
       read: formData.get("read"),
       content: formData.get("content"),
       author: formData.get("author"),

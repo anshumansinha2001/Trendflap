@@ -39,16 +39,16 @@ export default function Navbar() {
     <header className="bg-white shadow-md sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
         {/* Logo */}
-        <Link href="/" className="text-2xl font-bold text-blue-600">
+        <Link href="/" className="text-2xl font-bold text-blue-500">
           Trendflap
         </Link>
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex gap-6 items-center">
-          {/* <Link href="/" className="text-gray-700 hover:text-blue-600">
+          {/* <Link href="/" className="text-gray-700 hover:text-blue-500">
             Home
           </Link> */}
-          <Link href="/blog" className="text-gray-700 hover:text-blue-600">
+          <Link href="/blog" className="text-gray-700 hover:text-blue-500">
             Blog
           </Link>
 
@@ -56,7 +56,7 @@ export default function Navbar() {
           <div className="relative" ref={dropdownRef}>
             <button
               onClick={() => setDropdownOpen(!dropdownOpen)}
-              className="flex items-center gap-1 text-gray-700 hover:text-blue-600 hover:cursor-pointer"
+              className="flex items-center gap-1 text-gray-700 hover:text-blue-500 hover:cursor-pointer"
             >
               Categories
             </button>
@@ -88,16 +88,16 @@ export default function Navbar() {
             )}
           </div>
 
-          <Link href="/about" className="text-gray-700 hover:text-blue-600">
+          <Link href="/about" className="text-gray-700 hover:text-blue-500">
             About
           </Link>
-          <Link href="/contact" className="text-gray-700 hover:text-blue-600">
+          <Link href="/contact" className="text-gray-700 hover:text-blue-500">
             Contact
           </Link>
 
           {/* ✅ Admin link (only if logged in) */}
           {isAdmin && (
-            <Link href="/admin" className="text-gray-700 hover:text-blue-600">
+            <Link href="/admin" className="text-gray-700 hover:text-blue-500">
               Admin Pannel
             </Link>
           )}
@@ -126,28 +126,28 @@ export default function Navbar() {
         <nav className="md:hidden flex flex-col gap-4 px-6 py-4 bg-white border-t border-gray-200">
           {/* <Link
             href="/"
-            className="text-gray-700 hover:text-blue-600"
+            className="text-gray-700 hover:text-blue-500"
             onClick={() => setIsOpen(false)}
           >
             Home
           </Link> */}
           <Link
             href="/blog"
-            className="text-gray-700 hover:text-blue-600"
+            className="text-gray-700 hover:text-blue-500"
             onClick={() => setIsOpen(false)}
           >
             Blog
           </Link>
           <Link
             href="/about"
-            className="text-gray-700 hover:text-blue-600"
+            className="text-gray-700 hover:text-blue-500"
             onClick={() => setIsOpen(false)}
           >
             About
           </Link>
           <Link
             href="/contact"
-            className="text-gray-700 hover:text-blue-600"
+            className="text-gray-700 hover:text-blue-500"
             onClick={() => setIsOpen(false)}
           >
             Contact
@@ -157,7 +157,7 @@ export default function Navbar() {
           {isAdmin && (
             <Link
               href="/admin"
-              className="text-gray-700 hover:text-blue-600"
+              className="text-gray-700 hover:text-blue-500"
               onClick={() => setIsOpen(false)}
             >
               Admin Pannel
@@ -168,7 +168,7 @@ export default function Navbar() {
           <div className="flex flex-col">
             <button
               onClick={() => setMobileDropdownOpen(!mobileDropdownOpen)}
-              className="text-gray-700 hover:text-blue-600 text-left"
+              className="text-gray-700 hover:text-blue-500 text-left"
             >
               Categories
             </button>
@@ -177,21 +177,21 @@ export default function Navbar() {
               <div className="pl-4 flex flex-col gap-2 mt-2">
                 <Link
                   href="/ai"
-                  className="text-gray-600 hover:text-blue-600"
+                  className="text-gray-600 hover:text-blue-500"
                   onClick={() => setIsOpen(false)}
                 >
                   Artificial Intelligence (AI)
                 </Link>
                 <Link
                   href="/technology"
-                  className="text-gray-600 hover:text-blue-600"
+                  className="text-gray-600 hover:text-blue-500"
                   onClick={() => setIsOpen(false)}
                 >
                   Technology
                 </Link>
                 <Link
                   href="/digital-marketing"
-                  className="text-gray-600 hover:text-blue-600"
+                  className="text-gray-600 hover:text-blue-500"
                   onClick={() => setIsOpen(false)}
                 >
                   Digital Marketing

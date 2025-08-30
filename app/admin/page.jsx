@@ -12,12 +12,6 @@ export default function BlogAdminDashboard() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const router = useRouter();
 
-  const handleLogout = async () => {
-    if (!confirm("Are you sure you want to Logout?")) return;
-    await fetch("/api/admin/logout", { method: "POST" });
-    router.push("/admin/auth");
-  };
-
   // Fake data
   const blogs = [
     {
@@ -71,11 +65,7 @@ export default function BlogAdminDashboard() {
   return (
     <div className="flex h-screen bg-gray-50 overflow-hidden">
       {/* ✅ Sidebar Component */}
-      <Sidebar
-        sidebarOpen={sidebarOpen}
-        setSidebarOpen={setSidebarOpen}
-        handleLogout={handleLogout}
-      />
+      <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
 
       {/* Main Content */}
       <div className="flex-1 flex flex-col md:ml-64 min-h-screen overflow-y-auto scrollbar-hidden">
@@ -125,7 +115,7 @@ export default function BlogAdminDashboard() {
             action={
               <Link
                 href="/admin/blogs/new"
-                className="flex items-center gap-2 bg-blue-600 text-white px-3 py-2 rounded-md text-sm hover:bg-blue-700"
+                className="flex items-center gap-2 bg-blue-500 text-white px-3 py-2 rounded-md text-sm hover:bg-blue-700"
               >
                 <FiPlus /> New Blog
               </Link>
@@ -138,7 +128,7 @@ export default function BlogAdminDashboard() {
                 blog.status,
                 blog.date,
                 <div key={blog.id} className="flex gap-2">
-                  <button className="text-blue-600 hover:text-blue-800">
+                  <button className="text-blue-500 hover:text-blue-800">
                     <FiEdit />
                   </button>
                   <button className="text-red-600 hover:text-red-800">
