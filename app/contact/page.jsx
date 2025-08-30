@@ -60,54 +60,16 @@ export default function Contact() {
       </section>
 
       {/* Contact Form + Info */}
-      <section className="py-12 bg-white">
-        <div className="max-w-4xl mx-auto px-4 grid md:grid-cols-2 gap-10">
+      <section className="py-6 md:py-12 bg-white">
+        <div className="max-w-2xl mx-auto px-4 grid md:grid-cols-1 gap-10">
           <div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">
-              Send a Message
+            <h2 className="text-2xl font-bold text-gray-900 mb-2">
+              Send Me a Message
             </h2>
-            <ContactForm />
-          </div>
-
-          <div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">
-              Get in Touch
-            </h2>
-            <p className="text-gray-700 mb-6">
-              You can also reach out to us via email or connect on social media
-              for updates, insights, and collaborations.
+            <p className="text-gray-600 mb-4 md:mb-6">
+              I will get back to you as soon as possible!
             </p>
-            <ul className="space-y-3">
-              <li>
-                📧 <span className="font-medium">Email:</span>{" "}
-                <Link
-                  href="mailto:hello@trendflap.in"
-                  className="text-blue-500 hover:underline"
-                >
-                  hello@trendflap.in
-                </Link>
-              </li>
-              <li>
-                🐦 <span className="font-medium">Twitter:</span>{" "}
-                <Link
-                  href="https://twitter.com/trendflap"
-                  target="_blank"
-                  className="text-blue-500 hover:underline"
-                >
-                  @trendflap
-                </Link>
-              </li>
-              <li>
-                💼 <span className="font-medium">LinkedIn:</span>{" "}
-                <Link
-                  href="https://linkedin.com/company/trendflap"
-                  target="_blank"
-                  className="text-blue-500 hover:underline"
-                >
-                  Trendflap
-                </Link>
-              </li>
-            </ul>
+            <ContactForm />
           </div>
         </div>
       </section>

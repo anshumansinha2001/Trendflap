@@ -108,7 +108,7 @@ export default function Navbar() {
           <input
             type="text"
             placeholder="More fetaures coming soon..."
-            className="px-3 py-1 border rounded-md text-sm focus:ring-2 focus:ring-blue-500"
+            className="px-3 py-1 border border-blue-500 rounded-md text-sm focus:ring-2 focus:ring-blue-500"
           />
         </div>
 

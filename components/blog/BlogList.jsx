@@ -70,14 +70,14 @@ export default function BlogList() {
                   {/* Category Tag */}
                   <Link
                     href={`/${blog.category.toLowerCase().replace(" ", "-")}`}
-                    className="inline-block mb-3 px-3 py-1 text-xs font-medium text-blue-600 bg-blue-100 rounded-full hover:bg-blue-200"
+                    className="inline-block mb-3 px-3 py-1 text-xs font-medium text-blue-500 bg-blue-100 rounded-full hover:bg-blue-200"
                   >
                     {blog.category}
                   </Link>
 
                   {/* Title (Clickable) */}
                   <Link href={BlogURL}>
-                    <h3 className="text-xl font-semibold mb-1 hover:text-blue-600">
+                    <h3 className="text-xl font-semibold mb-1 hover:text-blue-500">
                       {blog.title}
                     </h3>
                   </Link>
@@ -95,7 +95,7 @@ export default function BlogList() {
                   {/* Read More */}
                   <Link
                     href={BlogURL}
-                    className="text-blue-600 font-medium hover:underline"
+                    className="text-blue-500 font-medium hover:underline"
                   >
                     Read More →
                   </Link>

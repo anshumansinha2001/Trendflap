@@ -79,7 +79,7 @@ export default function About() {
               Hi, I’m{" "}
               <Link
                 href="/anshuman-sinha"
-                className="cursor-pointer underline underline-offset-2 hover:text-blue-500"
+                className="cursor-pointer underline underline-offset-2 text-blue-500 hover:text-blue-400"
               >
                 Anshuman Sinha
               </Link>

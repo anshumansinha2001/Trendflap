@@ -1,6 +1,7 @@
 "use client";
 
 import * as gtag from "@/lib/gtag";
+import { toast } from "react-toastify";
 
 const ContactForm = () => {
   const handleSubmit = (e) => {
@@ -15,7 +16,8 @@ const ContactForm = () => {
     });
 
     // TODO: here you can send the form data to an API (optional)
-    alert("Message submitted! 🚀");
+    toast.success("Message submitted! 🚀");
+    e.target.reset(); // reset form fields
   };
 
   return (
@@ -26,6 +28,7 @@ const ContactForm = () => {
           type="text"
           placeholder="Your Name"
           className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          required
         />
       </div>
       <div>
@@ -34,6 +37,7 @@ const ContactForm = () => {
           type="email"
           placeholder="you@example.com"
           className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          required
         />
       </div>
       <div>
@@ -41,14 +45,15 @@ const ContactForm = () => {
         <textarea
           rows="5"
           placeholder="Write your message..."
+          required
           className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         ></textarea>
       </div>
       <button
         type="submit"
-        className="px-6 py-2 bg-blue-500 text-white rounded-md font-semibold hover:bg-blue-700 transition"
+        className="w-full cursor-pointer px-6 py-2 bg-blue-500 text-white rounded-md font-semibold hover:bg-blue-700 transition"
       >
-        Send Message
+        Submit
       </button>
     </form>
   );

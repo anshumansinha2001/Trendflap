@@ -17,7 +17,18 @@ export default function Footer() {
               height={40}
               className="rounded-full"
             />
-            <h2 className="text-2xl font-bold text-white">Trendflap</h2>
+            <div>
+              <h2 className="text-2xl font-bold text-white">Trendflap</h2>
+              <p className="text-sm">
+                created by{" "}
+                <Link
+                  href="/anshuman-sinha"
+                  className="hover:text-blue-400 font-semibold underline underline-offset-3"
+                >
+                  Anshuman Sinha
+                </Link>
+              </p>
+            </div>
           </div>
           <p className="text-sm">
             Your daily dose of AI, Tech & Digital Marketing insights. Stay ahead

@@ -190,7 +190,7 @@ export default async function BlogPage({ params }) {
             {/* Blog Category & Tag */}
             <div className="flex flex-wrap items-center gap-2 text-sm text-gray-600 my-4 md:my-6">
               <Link
-                href={`/${blog.category.toLowerCase()}`}
+                href={`/${blog.category.toLowerCase().replace(/\s+/g, "-")}`}
                 className="px-3 py-1 bg-blue-100 text-blue-500 rounded-full text-xs font-medium hover:bg-blue-200"
               >
                 {blog.category}
@@ -296,8 +296,13 @@ export default async function BlogPage({ params }) {
             </h2>
             <div className="space-y-4">
               {blog.faq.map((faq, idx) => (
-                <details key={idx} className="border p-4 rounded-lg">
-                  <summary className="font-semibold">{faq.question}</summary>
+                <details
+                  key={idx}
+                  className="border border-blue-500 p-4 rounded-lg"
+                >
+                  <summary className="font-semibold cursor-pointer">
+                    {faq.question}
+                  </summary>
                   <p
                     className="mt-2 text-gray-600"
                     dangerouslySetInnerHTML={{ __html: faq.answer }}
@@ -334,7 +339,7 @@ export default async function BlogPage({ params }) {
 
         {/* Featured Blogs Section */}
         {featuredBlogs && featuredBlogs.length > 0 && (
-          <section className="not-prose mt-10">
+          <section className="not-prose mt-14">
             <h3 className="text-2xl font-semibold text-gray-900 mb-4">
               What’s trending among readers today!
             </h3>

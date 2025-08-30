@@ -7,7 +7,7 @@ const FeaturedBlogCard = ({ blog }) => {
   return (
     <Link
       href={`/${blog.category.toLowerCase().replace(" ", "-")}/${blog.slug}`}
-      className="block bg-gray-100 p-3 rounded-lg shadow hover:shadow-md transition"
+      className="block bg-blue-50 p-3 rounded-lg shadow hover:shadow-md transition"
     >
       {/* Blog Image */}
       <Image
@@ -18,7 +18,7 @@ const FeaturedBlogCard = ({ blog }) => {
         className="w-full h-48 rounded-lg mb-4 object-fill hover:opacity-90 transition"
       />
       {/* Category Tag */}
-      <p className="inline-block mb-3 px-3 py-1 text-xs font-medium text-blue-500 bg-blue-100 rounded-full ">
+      <p className="inline-block mb-3 px-3 py-1 text-xs font-medium text-blue-500 bg-white rounded-full ">
         {blog.category}
       </p>
       {/* Blog Title */}

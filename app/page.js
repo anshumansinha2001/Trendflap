@@ -89,16 +89,17 @@ export default function Home() {
           />
           <h2 className="text-2xl font-bold text-gray-900 mb-2">About Me</h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            Hi, I&apos;m
+            Hi, I&apos;m {""}
             <Link
               href="/anshuman-sinha"
               className="font-semibold underline underline-offset-2"
             >
               Anshuman Sinha
             </Link>
-            , the creator of Trendflap. I&apos;m passionate about AI, Tech, and
-            Digital Marketing, and I love sharing insights, tutorials, and
-            strategies to help people stay ahead in the digital age.
+            , a computer science engineer and the creator of Trendflap. I&apos;m
+            passionate about AI, Tech, and Digital Marketing, and I love sharing
+            insights, tutorials, and strategies to help people stay ahead in the
+            digital age.
           </p>
         </div>
       </section>

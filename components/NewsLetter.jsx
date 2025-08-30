@@ -1,6 +1,15 @@
+"use client";
 import React from "react";
+import { toast } from "react-toastify";
 
 const NewsLetter = () => {
+  const onSubmit = (e) => {
+    e.preventDefault();
+    // Handle form submission logic here
+    toast.success("Subscribed successfully!");
+    e.target.reset(); // reset form fields
+  };
+
   return (
     <section className="bg-blue-500 py-16 text-center text-white">
       <h2 className="text-3xl font-bold mb-4">Stay Ahead of the Curve</h2>
@@ -8,7 +17,10 @@ const NewsLetter = () => {
         Join our newsletter to get the latest AI, tech, and marketing updates
         delivered straight to your inbox every week.
       </p>
-      <form className="flex flex-col md:flex-row justify-center gap-4 max-w-xs md:max-w-lg mx-auto">
+      <form
+        onSubmit={onSubmit}
+        className="flex flex-col md:flex-row justify-center gap-4 max-w-xs md:max-w-lg mx-auto"
+      >
         <input
           type="email"
           placeholder="Enter your email"
