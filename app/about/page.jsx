@@ -4,43 +4,36 @@ import NewsLetter from "@/components/NewsLetter";
 import { trendflapLogo } from "@/assests";
 import Image from "next/image";
 import Link from "next/link";
+import Script from "next/script";
 
 export const metadata = {
-  title: "About | Trendflap",
+  title: "About Trendflap | AI, Tech & Digital Marketing Blog",
   description:
-    "Learn more about me, my journey, and why I started Trendflap – your go-to hub for AI, Technology, and Digital Marketing insights.",
-  keywords: [
-    "Trendflap about us",
-    "Anshuman Sinha",
-    "AI blog founder",
-    "technology blog",
-    "digital marketing expert",
-    "SEO consultant",
-  ],
+    "Discover the story behind Trendflap, founded by Anshuman Sinha. Learn about our mission to simplify AI, technology, and digital marketing for everyone.",
   openGraph: {
-    title: "About Trendflap",
+    title: "About Trendflap | AI, Tech & Digital Marketing Blog",
     description:
-      "Learn more about our mission to simplify AI, technology, and digital marketing concepts for everyone.",
-    url: "https://www.trendflap.in/about",
+      "Discover the story behind Trendflap, founded by Anshuman Sinha. Learn about our mission to simplify AI, technology, and digital marketing for everyone.",
+    url: `${process.env.NEXT_PUBLIC_DOMAIN}/about`,
     type: "website",
     images: [
       {
-        url: "https://www.trendflap.in/TrendflapLogo.png",
+        url: `${process.env.NEXT_PUBLIC_DOMAIN}/TrendflapLogo.png`,
         width: 1200,
         height: 630,
-        alt: "Trendflap - About Us",
+        alt: "About Trendflap - AI, Tech & Digital Marketing",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "About Trendflap",
+    title: "About Trendflap | AI, Tech & Digital Marketing Blog",
     description:
-      "Learn more about our mission to simplify AI, technology, and digital marketing concepts for everyone.",
-    images: ["https://www.trendflap.in/TrendflapLogo.png"],
+      "Discover the story behind Trendflap, founded by Anshuman Sinha. Learn about our mission to simplify AI, technology, and digital marketing for everyone.",
+    images: [`${process.env.NEXT_PUBLIC_DOMAIN}/TrendflapLogo.png`],
   },
   alternates: {
-    canonical: "https://www.trendflap.in/about",
+    canonical: `${process.env.NEXT_PUBLIC_DOMAIN}/about`,
   },
 };
 
@@ -48,6 +41,64 @@ export default function About() {
   return (
     <>
       <Navbar />
+
+      {/* Schema Markup */}
+      <Script
+        id="about-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify([
+            {
+              "@context": "https://schema.org",
+              "@type": "AboutPage",
+              url: "https://www.trendflap.in/about",
+              name: "About Trendflap",
+              description:
+                "Learn more about Trendflap, founded by Anshuman Sinha, and our mission to simplify AI, technology, and digital marketing concepts.",
+              publisher: {
+                "@type": "Organization",
+                name: "Trendflap",
+                url: "https://www.trendflap.in",
+                logo: {
+                  "@type": "ImageObject",
+                  url: "https://www.trendflap.in/TrendflapLogo.png",
+                },
+              },
+              mainEntity: {
+                "@type": "Organization",
+                name: "Trendflap",
+                url: "https://www.trendflap.in",
+                founder: {
+                  "@type": "Person",
+                  name: "Anshuman Sinha",
+                  url: "https://www.trendflap.in/anshuman-sinha",
+                  jobTitle: "SEO Analyst & Web Developer",
+                  sameAs: [
+                    "https://www.linkedin.com/in/theanshumansinha",
+                    "https://www.anshumansinha.site/",
+                  ],
+                },
+              },
+            },
+            {
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "Trendflap",
+              url: "https://www.trendflap.in",
+              logo: "https://www.trendflap.in/TrendflapLogo.png",
+              founder: {
+                "@type": "Person",
+                name: "Anshuman Sinha",
+                url: "https://www.trendflap.in/anshuman-sinha",
+              },
+              sameAs: [
+                "https://twitter.com/your_twitter_handle",
+                "https://www.linkedin.com/in/theanshumansinha",
+              ],
+            },
+          ]),
+        }}
+      />
 
       {/* Hero Section */}
       <section className="bg-blue-50 py-6 md:py-12 text-center">

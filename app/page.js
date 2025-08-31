@@ -84,7 +84,7 @@ export default function Home() {
         <div className="max-w-4xl mx-auto text-center px-4">
           <Image
             src={adminPic}
-            alt="Author"
+            alt="Anshuman Sinha"
             className="w-28 h-28 rounded-full mx-auto mb-4"
           />
           <h2 className="text-2xl font-bold text-gray-900 mb-2">About Me</h2>

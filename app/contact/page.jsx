@@ -1,52 +1,77 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import Link from "next/link";
 
 import ContactForm from "@/components/ContactForm";
+import Script from "next/script";
 
 export const metadata = {
-  title: "Contact Us - Trendflap",
+  title: "Contact Trendflap | Get in Touch with Us",
   description:
-    "Got questions, ideas, or collaboration requests? We'd love to hear from you. Let's connect and grow together in the world of AI, Tech, and Digital Marketing.",
-  keywords: [
-    "Contact Trendflap",
-    "Get in Touch",
-    "AI blog founder",
-    "technology blog",
-    "digital marketing expert",
-    "SEO consultant",
-  ],
+    "Have questions, ideas, or collaboration requests? Contact Trendflap today. We’d love to connect and grow together in AI, Tech, and Digital Marketing.",
   openGraph: {
-    title: "Contact Us - Trendflap",
+    title: "Contact Trendflap | Get in Touch with Us",
     description:
-      "Got questions, ideas, or collaboration requests? We'd love to hear from you. Let's connect and grow together in the world of AI, Tech, and Digital Marketing.",
-    url: "https://www.trendflap.in/contact",
+      "Have questions, ideas, or collaboration requests? Contact Trendflap today. We’d love to connect and grow together in AI, Tech, and Digital Marketing.",
+    url: `${process.env.NEXT_PUBLIC_BASE_URL}/contact`,
     type: "website",
     images: [
       {
-        url: "https://www.trendflap.in/TrendflapLogo.png",
+        url: `${process.env.NEXT_PUBLIC_DOMAIN}/TrendflapLogo.png`,
         width: 1200,
         height: 630,
-        alt: "Trendflap Contact Page",
+        alt: "Contact Trendflap - AI, Tech & Digital Marketing Blog",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    site: "@your_twitter_handle",
-    title: "Contact Us - Trendflap",
+    title: "Contact Trendflap | Get in Touch with Us",
     description:
-      "Got questions, ideas, or collaboration requests? We'd love to hear from you. Let's connect and grow together in the world of AI, Tech, and Digital Marketing.",
-    image: "https://www.trendflap.in/TrendflapLogo.png",
+      "Have questions, ideas, or collaboration requests? Contact Trendflap today. We’d love to connect and grow together in AI, Tech, and Digital Marketing.",
+    images: [`${process.env.NEXT_PUBLIC_DOMAIN}/TrendflapLogo.png`],
   },
   alternates: {
-    canonical: "https://www.trendflap.in/contact",
+    canonical: `${process.env.NEXT_PUBLIC_BASE_URL}/contact`,
   },
 };
 
 export default function Contact() {
   return (
     <>
+      <Script
+        id="contact-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify([
+            {
+              "@context": "https://schema.org",
+              "@type": "ContactPage",
+              url: "https://www.trendflap.in/contact",
+              name: "Contact Trendflap",
+              description:
+                "Have questions, ideas, or collaboration requests? Contact Trendflap today to connect about AI, Tech, and Digital Marketing.",
+            },
+            {
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "Trendflap",
+              url: "https://www.trendflap.in",
+              logo: "https://www.trendflap.in/TrendflapLogo.png",
+              contactPoint: {
+                "@type": "ContactPoint",
+                contactType: "customer support",
+                email: "info@trendflap.in", // replace with your actual email
+                availableLanguage: ["English", "Hindi"],
+              },
+              sameAs: [
+                "https://twitter.com/your_twitter_handle",
+                "https://www.linkedin.com/in/theanshumansinha",
+              ],
+            },
+          ]),
+        }}
+      />
+
       <Navbar />
 
       {/* Hero Section */}

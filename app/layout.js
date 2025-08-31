@@ -17,20 +17,19 @@ const outfit = Outfit({
 export const metadata = {
   title: "Trendflap: AI, Technology & Digital Marketing Trends",
   description:
-    "Trendflap is a modern blog platform dedicated to exploring the latest trends in AI, Tech, and Digital Marketing. ",
-  keywords:
-    "Trendflap, AI, Tech, Digital Marketing, Blog, Trends, AI Trends, Tech Trends, Digital Marketing Trends",
-  author: "Anshuman Sinha",
+    "Trendflap is a modern blog platform dedicated to exploring the latest trends in AI, Tech, and Digital Marketing.",
   openGraph: {
     title: "Trendflap: AI, Tech, and Digital Marketing Trends",
     description:
-      "Trendflap is a modern blog platform dedicated to exploring the latest trends in AI, Tech, and Digital Marketing. ",
+      "Trendflap is a modern blog platform dedicated to exploring the latest trends in AI, Tech, and Digital Marketing.",
     url: `${process.env.NEXT_PUBLIC_DOMAIN}`,
     type: "website",
     images: [
       {
-        url: `${process.env.NEXT_PUBLIC_DOMAIN}/favicon.ico`,
-        alt: "Trendflap Logo",
+        url: `${process.env.NEXT_PUBLIC_DOMAIN}/TrendflapLogo.png`,
+        width: 1200,
+        height: 630,
+        alt: "Trendflap Blog - AI, Tech, and Digital Marketing",
       },
     ],
   },
@@ -39,11 +38,11 @@ export const metadata = {
     site: "@your_twitter_handle",
     title: "Trendflap",
     description:
-      "Trendflap is a modern blog platform dedicated to exploring the latest trends in AI, Tech, and Digital Marketing. ",
-    image: `${process.env.NEXT_PUBLIC_DOMAIN}/favicon.ico`,
+      "Trendflap is a modern blog platform dedicated to exploring the latest trends in AI, Tech, and Digital Marketing.",
+    images: [`${process.env.NEXT_PUBLIC_DOMAIN}/TrendflapLogo.png`],
   },
   alternates: {
-    canonical: `${process.env.NEXT_PUBLIC_DOMAIN}`,
+    canonical: `${process.env.NEXT_PUBLIC_DOMAIN}/`,
   },
 };
 

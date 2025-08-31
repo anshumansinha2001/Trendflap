@@ -404,6 +404,6 @@ export async function generateMetadata({ params }) {
       images: [{ url: imageUrl, width: 800, height: 600, alt: altText }],
     },
     alternates: { canonical: canonicalUrl },
-    robots: { index: true, follow: true, nocache: true },
+    robots: { index: true, follow: true },
   };
 }

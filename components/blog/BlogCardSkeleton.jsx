@@ -4,7 +4,7 @@ import React from "react";
 export default function BlogCardSkeleton() {
   return (
     <main className="max-w-6xl mx-auto px-4 py-0 min-h-[60vh]">
-      <h2 className="text-2xl text-blue-500 text-center font-semibold mb-4">
+      <h2 className="text-blue-500 text-center mb-4">
         Loading… because a reader this smart deserves the best😎!
       </h2>
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 ">

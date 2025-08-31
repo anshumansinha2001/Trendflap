@@ -1,12 +1,74 @@
 import { adminPic } from "@/assests";
 import Navbar from "@/components/Navbar";
 import Image from "next/image";
+import Script from "next/script";
 import { FaLinkedin, FaGlobe, FaEnvelope } from "react-icons/fa";
 
 export default function AnshumanSinhaPage() {
   return (
     <>
       <Navbar />
+
+      {/* ✅ Structured Data Schema */}
+      <Script
+        id="anshuman-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            url: "https://www.trendflap.in/anshuman-sinha",
+            name: "Anshuman Sinha | Digital Marketer & Web Developer",
+            description:
+              "Personal portfolio of Anshuman Sinha, SEO Analyst and creator of Trendflap. Skilled in SEO, web development, and digital marketing.",
+            about: {
+              "@type": "Person",
+              name: "Anshuman Sinha",
+              image: `${process.env.NEXT_PUBLIC_DOMAIN}/admin.jpg`,
+              jobTitle: "SEO Analyst & Web Developer",
+              worksFor: {
+                "@type": "Organization",
+                name: "Wisemonk",
+              },
+              alumniOf: [
+                {
+                  "@type": "CollegeOrUniversity",
+                  name: "Visvesvaraya Technological University (VTU)",
+                },
+                {
+                  "@type": "EducationalOrganization",
+                  name: "National Institute of Digital Marketing (NIDM)",
+                },
+              ],
+              knowsAbout: [
+                "Search Engine Optimization (SEO)",
+                "Web Development",
+                "Content Marketing",
+                "Digital Marketing",
+              ],
+              email: "mailto:anshumansinhaa@icloud.com",
+              url: "https://www.trendflap.in/anshuman-sinha",
+              sameAs: [
+                "https://www.linkedin.com/in/theanshumansinha",
+                "https://www.anshumansinha.site/",
+              ],
+              address: {
+                "@type": "PostalAddress",
+                addressLocality: "Bengaluru",
+                addressRegion: "Karnataka",
+                addressCountry: "India",
+              },
+            },
+            publisher: {
+              "@type": "Organization",
+              name: "Trendflap",
+              url: "https://www.trendflap.in",
+            },
+          }),
+        }}
+      />
+
+      {/* ✅ PAGE CONTENT */}
       <main className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 lg:grid-cols-3 gap-10">
         {/* LEFT SIDEBAR */}
         <aside className="lg:col-span-1 bg-white p-6 rounded-xl shadow-md md:sticky md:top-20 h-fit">
@@ -229,25 +291,18 @@ export const metadata = {
   title: "Anshuman Sinha | Digital Marketer & Web Developer",
   description:
     "Anshuman Sinha, SEO Analyst and creator of Trendflap. Skilled in SEO, web development, and digital marketing with proven client project success.",
-  keywords: [
-    "Anshuman Sinha",
-    "Trendflap founder",
-    "trendflap creator",
-    "SEO Analyst",
-    "Web Developer",
-    "Digital Marketer",
-  ],
   openGraph: {
     title: "Anshuman Sinha | Digital Marketer & Web Developer",
     description:
       "Anshuman Sinha, SEO Analyst and creator of Trendflap. Skilled in SEO, web development, and digital marketing with proven client project success.",
-    url: "https://www.trendflap.in/anshuman-sinha",
+    url: `${process.env.NEXT_PUBLIC_DOMAIN}/anshuman-sinha`,
     type: "profile",
     images: [
       {
-        url: "https://www.trendflap.in/admin.jpg",
+        url: `${process.env.NEXT_PUBLIC_DOMAIN}/admin.jpg`,
+        width: 1200,
         height: 630,
-        alt: "Anshuman Sinha",
+        alt: "Anshuman Sinha - Digital Marketer & Web Developer",
       },
     ],
   },
@@ -256,9 +311,9 @@ export const metadata = {
     title: "Anshuman Sinha | Digital Marketer & Web Developer",
     description:
       "Anshuman Sinha, SEO Analyst and creator of Trendflap. Skilled in SEO, web development, and digital marketing with proven client project success.",
-    images: ["https://www.trendflap.in/admin.jpg"],
+    images: [`${process.env.NEXT_PUBLIC_DOMAIN}/admin.jpg`],
   },
   alternates: {
-    canonical: "https://www.trendflap.in/anshuman-sinha",
+    canonical: `${process.env.NEXT_PUBLIC_DOMAIN}/anshuman-sinha`,
   },
 };

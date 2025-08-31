@@ -25,6 +25,7 @@ const NewsLetter = () => {
           type="email"
           placeholder="Enter your email"
           className="px-4 py-2 rounded-md text-gray-900 bg-amber-50 w-full"
+          required
         />
         <button
           type="submit"
