@@ -139,21 +139,21 @@ export default function Home() {
             What Readers Say
           </h2>
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-gray-50 p-6 rounded-lg shadow-md">
+            <div className="bg-gray-50 p-6 rounded-lg shadow-md hover:bg-blue-100 transition">
               <p className="text-gray-600 mb-4">
                 “Trendflap helped me understand AI tools better for my business.
                 Super insightful!”
               </p>
               <span className="font-semibold text-gray-900">— Sarah M.</span>
             </div>
-            <div className="bg-gray-50 p-6 rounded-lg shadow-md">
+            <div className="bg-gray-50 p-6 rounded-lg shadow-md hover:bg-blue-100 transition">
               <p className="text-gray-600 mb-4">
                 “The tutorials are clear and easy to follow. Great resource for
                 marketers.”
               </p>
               <span className="font-semibold text-gray-900">— David K.</span>
             </div>
-            <div className="bg-gray-50 p-6 rounded-lg shadow-md">
+            <div className="bg-gray-50 p-6 rounded-lg shadow-md hover:bg-blue-100 transition">
               <p className="text-gray-600 mb-4">
                 “I always find the latest tech trends here before anywhere else.
                 Love it!”

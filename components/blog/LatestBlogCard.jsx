@@ -8,7 +8,7 @@ const LatestBlogCard = ({ blog }) => {
     <Link
       key={blog.slug}
       href={`/${blog.category.toLowerCase().replace(" ", "-")}/${blog.slug}`}
-      className="bg-white rounded-xl shadow hover:shadow-lg transition p-2.5 border"
+      className="bg-white rounded-xl shadow hover:shadow-lg hover:bg-blue-50 transition p-2.5 border"
     >
       <Image
         src={blog.image}

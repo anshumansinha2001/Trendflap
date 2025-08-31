@@ -55,7 +55,7 @@ export default function BlogList() {
             return (
               <div
                 key={blog._id}
-                className="border rounded-xl shadow hover:shadow-lg transition bg-white overflow-hidden"
+                className="border rounded-xl shadow hover:shadow-lg hover:border-blue-500 transition bg-white overflow-hidden"
               >
                 {/* Blog Image (Clickable) */}
                 <Link href={BlogURL}>

@@ -235,7 +235,7 @@ export default async function BlogPage({ params }) {
                 fetchPriority="high"
                 decoding="async"
                 placeholder="blur"
-                blurDataURL={blog.blurDataURL || "/TrendflapLogo.png"}
+                blurDataURL={"/TrendflapLogo.png"}
                 sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-cover rounded-lg"
               />

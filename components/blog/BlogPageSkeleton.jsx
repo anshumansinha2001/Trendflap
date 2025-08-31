@@ -26,6 +26,10 @@ export default function BlogPageSkeleton() {
             <div className="w-full h-60 md:h-100 bg-gray-300 rounded-xl shadow-md mt-4"></div>
           </section>
 
+          <h2 className="text-center text-blue-500 py-2.5 lg:hidden">
+            Hold on… greatness like you deserves a proper blog 😋!
+          </h2>
+
           {/* Sidebar (TOC + TLDR) */}
           <div className="lg:col-span-2 space-y-6">
             <div className="h-48 bg-gray-100 rounded-lg shadow-md"></div>{" "}
@@ -36,6 +40,10 @@ export default function BlogPageSkeleton() {
         </header>
 
         {/* Blog Content */}
+        <h2 className="text-center text-2xl font-semibold text-blue-500 py-2.5 hidden lg:block mt-6">
+          Hold on… greatness like you deserves a proper blog 😋!
+        </h2>
+
         <article className="mt-6 space-y-6">
           {/* Multiple blocks to simulate paragraphs and headings */}
           <div className="h-8 bg-gray-300 rounded w-2/3"></div> {/* H2 */}
