@@ -6,7 +6,7 @@ import Link from "next/link";
 import { fetchBlogs } from "@/lib/api";
 
 export const metadata = {
-  title: "AI | Trendflap - The AI Blog for Digital Marketing and Technology",
+  title: "AI - Trendflap - The AI Blog for Digital Marketing and Technology",
   description:
     "Explore the latest trends and insights in AI, digital marketing, and technology with Trendflap's dedicated AI blog.",
   keywords: [
@@ -22,7 +22,7 @@ export const metadata = {
     "AI Tools",
   ],
   openGraph: {
-    title: "AI | Trendflap - The AI Blog for Digital Marketing and Technology",
+    title: "AI - Trendflap - The AI Blog for Digital Marketing and Technology",
     description:
       "Explore the latest trends and insights in AI, digital marketing, and technology with Trendflap's dedicated AI blog.",
     url: "https://trendflap.in/ai",
@@ -32,13 +32,13 @@ export const metadata = {
         url: "https://trendflap.in/TrendflapLogo.png",
         width: 1200,
         height: 630,
-        alt: "AI | Trendflap - The AI Blog for Digital Marketing and Technology",
+        alt: "AI - Trendflap - The AI Blog for Digital Marketing and Technology",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "AI | Trendflap - The AI Blog for Digital Marketing and Technology",
+    title: "AI - Trendflap - The AI Blog for Digital Marketing and Technology",
     description:
       "Explore the latest trends and insights in AI, digital marketing, and technology with Trendflap's dedicated AI blog.",
     images: ["https://trendflap.in/TrendflapLogo.png"],

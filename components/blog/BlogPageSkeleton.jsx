@@ -20,8 +20,8 @@ export default function BlogPageSkeleton() {
               <div className="h-4 w-20 bg-gray-200 rounded"></div>{" "}
               {/* Author */}
               <div className="h-4 w-16 bg-gray-200 rounded"></div> {/* Date */}
-              <div className="h-4 w-16 bg-gray-200 rounded"></div> {/* Read */}
             </div>
+            <div className="h-4 w-48 bg-gray-200 rounded"></div> {/* Read */}
             {/* Image */}
             <div className="w-full h-60 md:h-100 bg-gray-300 rounded-xl shadow-md mt-4"></div>
           </section>

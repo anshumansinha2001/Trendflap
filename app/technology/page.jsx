@@ -6,7 +6,7 @@ import Link from "next/link";
 import { fetchBlogs } from "@/lib/api";
 
 export const metadata = {
-  title: "Technology Insights & IT Trends | Trendflap",
+  title: "Technology Insights & IT Trends - Trendflap",
   description:
     "Stay ahead with the latest technology insights — software development, cloud computing, cybersecurity, IT infrastructure, and emerging tech trends for 2025.",
   keywords: [
@@ -19,7 +19,7 @@ export const metadata = {
     "tech trends",
   ],
   openGraph: {
-    title: "Technology Insights & IT Trends | Trendflap",
+    title: "Technology Insights & IT Trends - Trendflap",
     description:
       "Stay ahead with the latest technology insights — software development, cloud computing, cybersecurity, IT infrastructure, and emerging tech trends for 2025.",
     url: "https://www.trendflap.in/technology",
@@ -29,13 +29,13 @@ export const metadata = {
         url: "https://www.trendflap.in/TrendflapLogo.png",
         width: 1200,
         height: 630,
-        alt: "Technology Insights & IT Trends | Trendflap",
+        alt: "Technology Insights & IT Trends - Trendflap",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Technology Insights & IT Trends | Trendflap",
+    title: "Technology Insights & IT Trends - Trendflap",
     description:
       "Stay ahead with the latest technology insights — software development, cloud computing, cybersecurity, IT infrastructure, and emerging tech trends for 2025.",
     images: ["https://www.trendflap.in/TrendflapLogo.png"],

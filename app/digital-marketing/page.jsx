@@ -6,7 +6,7 @@ import Link from "next/link";
 import { fetchBlogs } from "@/lib/api";
 
 export const metadata = {
-  title: "Digital Marketing Blogs & Insights | Trendflap",
+  title: "Digital Marketing Blogs & Insights - Trendflap",
   description:
     "Master Digital Marketing with our 2025 playbooks — SEO, content strategy, paid ads, email funnels, and analytics. Learn step-by-step workflows to grow your business.",
   keywords: [
@@ -19,7 +19,7 @@ export const metadata = {
     "email marketing",
   ],
   openGraph: {
-    title: "Digital Marketing Blogs & Insights | Trendflap",
+    title: "Digital Marketing Blogs & Insights - Trendflap",
     description:
       "Master Digital Marketing with our 2025 playbooks — SEO, content strategy, paid ads, email funnels, and analytics. Learn step-by-step workflows to grow your business.",
     url: "https://trendflap.in/digital-marketing",
@@ -29,13 +29,13 @@ export const metadata = {
         url: "https://trendflap.in/TrendflapLogo.png",
         width: 1200,
         height: 630,
-        alt: "Digital Marketing Blogs & Insights | Trendflap",
+        alt: "Digital Marketing Blogs & Insights - Trendflap",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Digital Marketing Blogs & Insights | Trendflap",
+    title: "Digital Marketing Blogs & Insights - Trendflap",
     description:
       "Master Digital Marketing with our 2025 playbooks — SEO, content strategy, paid ads, email funnels, and analytics.",
     images: ["https://trendflap.in/TrendflapLogo.png"],

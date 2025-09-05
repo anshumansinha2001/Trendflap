@@ -18,7 +18,7 @@ export default function AnshumanSinhaPage() {
             "@context": "https://schema.org",
             "@type": "WebPage",
             url: "https://www.trendflap.in/anshuman-sinha",
-            name: "Anshuman Sinha | Digital Marketer & Web Developer",
+            name: "Anshuman Sinha | Web Developer & SEO Analyst",
             description:
               "Personal portfolio of Anshuman Sinha, SEO Analyst and creator of Trendflap. Skilled in SEO, web development, and digital marketing.",
             about: {
@@ -288,11 +288,11 @@ export default function AnshumanSinhaPage() {
 }
 
 export const metadata = {
-  title: "Anshuman Sinha | Digital Marketer & Web Developer",
+  title: "Anshuman Sinha | Web Developer & SEO Analyst",
   description:
     "Anshuman Sinha, SEO Analyst and creator of Trendflap. Skilled in SEO, web development, and digital marketing with proven client project success.",
   openGraph: {
-    title: "Anshuman Sinha | Digital Marketer & Web Developer",
+    title: "Anshuman Sinha | Web Developer & SEO Analyst",
     description:
       "Anshuman Sinha, SEO Analyst and creator of Trendflap. Skilled in SEO, web development, and digital marketing with proven client project success.",
     url: `${process.env.NEXT_PUBLIC_DOMAIN}/anshuman-sinha`,
@@ -308,7 +308,7 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Anshuman Sinha | Digital Marketer & Web Developer",
+    title: "Anshuman Sinha | Web Developer & SEO Analyst",
     description:
       "Anshuman Sinha, SEO Analyst and creator of Trendflap. Skilled in SEO, web development, and digital marketing with proven client project success.",
     images: [`${process.env.NEXT_PUBLIC_DOMAIN}/admin.jpg`],

@@ -5,7 +5,7 @@ import NewsLetter from "@/components/NewsLetter";
 
 // This is the standard way to export metadata in the Next.js App Router
 export const metadata = {
-  title: "Blogs | TrendFlap",
+  title: "Blogs - Trendflap",
   description:
     "Explore the latest insights, trends, and strategies in AI, Technology, and Digital Marketing from our blog.",
   keywords: [
@@ -15,7 +15,7 @@ export const metadata = {
     "TrendFlap blog",
   ],
   openGraph: {
-    title: "Blogs | TrendFlap",
+    title: "Blogs - Trendflap",
     description:
       "Explore the latest insights, trends, and strategies in AI, Technology, and Digital Marketing from our blog.",
     url: "https://www.trendflap.in/blog",
@@ -31,7 +31,7 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Blogs | TrendFlap",
+    title: "Blogs - Trendflap",
     description:
       "Explore the latest insights, trends, and strategies in AI, Technology, and Digital Marketing from our blog.",
   },

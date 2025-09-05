@@ -211,19 +211,21 @@ export default async function BlogPage({ params }) {
             </div>
 
             {/* Meta Info (Author + Date + Reading Time) */}
-            <div className="flex flex-wrap items-center gap-2 text-sm text-gray-600 my-4 md:my-6">
-              <span className="font-medium text-gray-900">
+            <div className="flex flex-wrap items-center gap-2 text-sm text-gray-600 mt-4 md:mt-6">
+              <span>
                 By{" "}
                 <Link
                   href={`/${blog.authorSlug}`}
-                  className="underline hover:text-blue-500 transition underline-offset-2 cursor-pointer"
+                  className="font-medium text-gray-900 underline hover:text-blue-500 transition underline-offset-2 cursor-pointer"
                 >
-                  {blog.author}{" "}
+                  {blog.author}
                 </Link>
               </span>
-              <span>• {formatted}</span>
               <span>• {blog.read}</span>
             </div>
+            <p className="text-sm text-gray-600 my-2">
+              Last updated on {formatted}
+            </p>
 
             {/* Blog Image */}
             <div className="relative w-full aspect-[16/9]">

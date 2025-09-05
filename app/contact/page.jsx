@@ -75,7 +75,7 @@ export default function Contact() {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="bg-gray-50 py-16 text-center">
+      <section className="bg-blue-50 py-16 text-center">
         <h1 className="text-4xl font-bold text-gray-900 mb-4">Contact Us</h1>
         <p className="text-lg text-gray-600 max-w-2xl mx-auto">
           Got questions, ideas, or collaboration requests? We’d love to hear

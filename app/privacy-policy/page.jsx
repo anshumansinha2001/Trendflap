@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 import Link from "next/link";
 
 export const metadata = {
-  title: "Privacy Policy | Trendflap",
+  title: "Privacy Policy - Trendflap",
   description:
     "Learn about how Trendflap collects, uses, and protects your personal information when you visit our website. Your privacy matters to us.",
   robots: {
@@ -12,7 +12,7 @@ export const metadata = {
     follow: true,
   },
   openGraph: {
-    title: "Privacy Policy | Trendflap",
+    title: "Privacy Policy - Trendflap",
     description:
       "Our privacy policy explains how we collect, use, and protect your information. Your privacy matters to us at Trendflap.",
     url: "https://www.trendflap.in/privacy-policy",
@@ -30,7 +30,7 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Privacy Policy | Trendflap",
+    title: "Privacy Policy - Trendflap",
     description:
       "Our privacy policy explains how we collect, use, and protect your information. Your privacy matters to us at Trendflap.",
   },
