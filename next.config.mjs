@@ -12,15 +12,16 @@ const nextConfig = {
       },
     ];
   },
-  // async redirects() {
-  //   return [
-  //     {
-  //       source: "/",
-  //       destination: "/blog",
-  //       permanent: false, // temporary redirect (302)
-  //     },
-  //   ];
-  // },
+
+  async redirects() {
+    return [
+      {
+        source: "/technology/optimize-your-content-for-chatgpt-and-ai-search",
+        destination: "/technology/optimize-content-for-ai-search",
+        permanent: true, // 301 redirect
+      },
+    ];
+  },
 };
 
 export default nextConfig;
